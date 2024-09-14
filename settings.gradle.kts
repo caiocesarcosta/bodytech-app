@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "BodyTech"
 include(":app")
+include(":bioimpedance")

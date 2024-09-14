@@ -4,24 +4,29 @@ plugins {
 }
 
 android {
-    namespace = "com.example.bodytech"
+    namespace = "com.example.bioimpedance"
     compileSdk = Versions.compileSdkVersion
 
     defaultConfig {
-        applicationId = "com.example.bodytech"
+        applicationId = "com.example.bioimpedance"
         minSdk = Versions.minSdkVersion
         targetSdk = Versions.targetSdkVersion
         versionCode = Versions.versionCode
         versionName = Versions.versionName
 
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -31,12 +36,16 @@ android {
     kotlinOptions {
         jvmTarget = Versions.jvmTarget
     }
-
     buildFeatures {
         compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.composeOptionKotlinCompiler
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 }
 
@@ -47,6 +56,7 @@ dependencies {
     implementation(Dep.material)
     implementation(Dep.constraintLayout)
     implementation(Dep.activityCompose)
+    implementation(platform(Dep.composeBom))
     implementation(Dep.composeUi)
     implementation(Dep.composeUiGraphics)
     implementation(Dep.composeUiToolingPreview)
@@ -60,5 +70,5 @@ dependencies {
     androidTestImplementation(TestDep.composeUiTestJunit4)
     debugImplementation(TestDep.uiTooling)
     debugImplementation(TestDep.uiTestManifest)
-    implementation(project(":bioimpedance"))
+
 }

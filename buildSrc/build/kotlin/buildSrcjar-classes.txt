@@ -1,0 +1,1 @@
+D:\devc3\src\repositorio\bodytech-app\buildSrc\build\classes\kotlin\main\Dep.class;D:\devc3\src\repositorio\bodytech-app\buildSrc\build\classes\kotlin\main\TestDep.class;D:\devc3\src\repositorio\bodytech-app\buildSrc\build\classes\kotlin\main\Versions.class

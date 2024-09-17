@@ -2,7 +2,7 @@ object Versions {
     const val kotlinVersion = "1.9.22"
     const val applicationVersion = "8.2.2"
     const val compileSdkVersion = 34
-    const val minSdkVersion = 24
+    const val minSdkVersion = 21
     const val targetSdkVersion = 34
     const val versionCode = 1
     const val versionName = "1.0"

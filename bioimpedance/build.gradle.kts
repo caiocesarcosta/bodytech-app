@@ -1,18 +1,18 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
-    namespace = "com.example.bioimpedance"
+    namespace = "com.example.bodytech.bioimpedance"
     compileSdk = Versions.compileSdkVersion
 
     defaultConfig {
-        applicationId = "com.example.bioimpedance"
-        minSdk = Versions.minSdkVersion
-        targetSdk = Versions.targetSdkVersion
-        versionCode = Versions.versionCode
-        versionName = Versions.versionName
+//        applicationId = "com.example.bioimpedance"
+//        targetSdk = Versions.targetSdkVersion
+//        minSdk = 21
+//        versionCode = Versions.versionCode
+//        versionName = Versions.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -50,18 +50,17 @@ android {
 }
 
 dependencies {
+    implementation(platform(Dep.composeBom))
     implementation(Dep.coreKtx)
     implementation(Dep.lifecycleRuntimeKtx)
     implementation(Dep.appcompat)
     implementation(Dep.material)
     implementation(Dep.constraintLayout)
     implementation(Dep.activityCompose)
-    implementation(platform(Dep.composeBom))
     implementation(Dep.composeUi)
     implementation(Dep.composeUiGraphics)
     implementation(Dep.composeUiToolingPreview)
     implementation(Dep.composeMaterial3)
-    implementation(Dep.composeBom)
 
     testImplementation(TestDep.junit)
     androidTestImplementation(TestDep.extJunit)

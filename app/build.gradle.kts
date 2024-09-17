@@ -9,14 +9,15 @@ android {
 
     defaultConfig {
         applicationId = "com.example.bodytech"
-        minSdk = Versions.minSdkVersion
         targetSdk = Versions.targetSdkVersion
+        minSdk = Versions.minSdkVersion
         versionCode = Versions.versionCode
         versionName = Versions.versionName
 
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+
 
     buildTypes {
         release {
@@ -34,13 +35,17 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = false
     }
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.composeOptionKotlinCompiler
     }
+
+
 }
 
 dependencies {
+    implementation(platform(Dep.composeBom))
     implementation(Dep.coreKtx)
     implementation(Dep.lifecycleRuntimeKtx)
     implementation(Dep.appcompat)
@@ -51,7 +56,6 @@ dependencies {
     implementation(Dep.composeUiGraphics)
     implementation(Dep.composeUiToolingPreview)
     implementation(Dep.composeMaterial3)
-    implementation(Dep.composeBom)
 
     testImplementation(TestDep.junit)
     androidTestImplementation(TestDep.extJunit)

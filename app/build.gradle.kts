@@ -38,7 +38,7 @@ android {
         buildConfig = false
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.composeOptionKotlinCompiler
+        kotlinCompilerExtensionVersion = Versions.composeOptionKotlinCompilerVersion
     }
 
 
@@ -46,6 +46,7 @@ android {
 
 dependencies {
     implementation(platform(Dep.composeBom))
+    implementation(platform(Dep.firebaseFirestore))
     implementation(Dep.coreKtx)
     implementation(Dep.lifecycleRuntimeKtx)
     implementation(Dep.appcompat)
@@ -56,6 +57,7 @@ dependencies {
     implementation(Dep.composeUiGraphics)
     implementation(Dep.composeUiToolingPreview)
     implementation(Dep.composeMaterial3)
+    implementation(Dep.firebaseBom)
 
     testImplementation(TestDep.junit)
     androidTestImplementation(TestDep.extJunit)

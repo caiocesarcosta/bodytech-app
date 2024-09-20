@@ -21,7 +21,9 @@ object Versions {
     const val uiToolingVersion = "1.5.1"
     const val lifecycleRuntimeKtxVersion = "2.6.1"
     const val coreKtxVersion = "1.13.1"
-    const val composeOptionKotlinCompiler = "1.5.9"
+    const val composeOptionKotlinCompilerVersion = "1.5.9"
+    const val googleServicesVersion = "4.4.0"
+    const val firebaseBomVersion = "32.2.3"
 }
 
 object Dep {
@@ -37,6 +39,13 @@ object Dep {
     const val composeUiGraphics = "androidx.compose.ui:ui-graphics"
     const val composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
     const val composeMaterial3 = "androidx.compose.material3:material3:${Versions.composeMaterial3Version}"
+    const val firebaseBom = "firebase:firebase-bom:${Versions.firebaseBomVersion}"
+    const val firebaseFirestore = "com.google.firebase:firebase-firestore-ktx"
+
+
+    // Firebase
+//    implementation(platform("com.google.firebase:firebase-bom:32.2.3")) // Ou a versão mais recente
+//    implementation("com.google.firebase:firebase-firestore-ktx")
 }
 
 object TestDep {

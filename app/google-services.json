@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "504255037510",
+    "project_id": "body-tech-app",
+    "storage_bucket": "body-tech-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504255037510:android:20e0b2a7861e1649aaca47",
+        "android_client_info": {
+          "package_name": "com.example.bodytech"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4mDZWJa7UAqB3riqsIKtMf3To-2hJI6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

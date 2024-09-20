@@ -4,20 +4,18 @@ plugins {
 }
 
 android {
-    namespace = "com.example.bodytech"
+    namespace = "com.example.bodytech" // Substitua pelo seu namespace
     compileSdk = Versions.compileSdkVersion
 
     defaultConfig {
         applicationId = "com.example.bodytech"
-        targetSdk = Versions.targetSdkVersion
         minSdk = Versions.minSdkVersion
+        targetSdk = Versions.targetSdkVersion
         versionCode = Versions.versionCode
         versionName = Versions.versionName
 
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
 
     buildTypes {
         release {
@@ -32,7 +30,6 @@ android {
     kotlinOptions {
         jvmTarget = Versions.jvmTarget
     }
-
     buildFeatures {
         compose = true
         buildConfig = false
@@ -40,13 +37,14 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.composeOptionKotlinCompilerVersion
     }
-
-
 }
 
 dependencies {
+    // Firebase - Declaração do BOM e do Firestore
+    implementation(platform(Dep.firebaseBom))
+    implementation(Dep.firebaseFirestore)
+
     implementation(platform(Dep.composeBom))
-    implementation(platform(Dep.firebaseFirestore))
     implementation(Dep.coreKtx)
     implementation(Dep.lifecycleRuntimeKtx)
     implementation(Dep.appcompat)
@@ -57,7 +55,6 @@ dependencies {
     implementation(Dep.composeUiGraphics)
     implementation(Dep.composeUiToolingPreview)
     implementation(Dep.composeMaterial3)
-    implementation(Dep.firebaseBom)
 
     testImplementation(TestDep.junit)
     androidTestImplementation(TestDep.extJunit)

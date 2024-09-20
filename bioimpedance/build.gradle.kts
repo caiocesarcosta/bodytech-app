@@ -4,20 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.bodytech.bioimpedance"
+    namespace = "com.example.bioimpedance" // Substitua pelo seu namespace
     compileSdk = Versions.compileSdkVersion
 
     defaultConfig {
-//        applicationId = "com.example.bioimpedance"
-//        targetSdk = Versions.targetSdkVersion
-//        minSdk = 21
-//        versionCode = Versions.versionCode
-//        versionName = Versions.versionName
+        minSdk = Versions.minSdkVersion
+        targetSdk = Versions.targetSdkVersion
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -42,11 +37,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.composeOptionKotlinCompilerVersion
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
@@ -69,5 +59,4 @@ dependencies {
     androidTestImplementation(TestDep.composeUiTestJunit4)
     debugImplementation(TestDep.uiTooling)
     debugImplementation(TestDep.uiTestManifest)
-
 }

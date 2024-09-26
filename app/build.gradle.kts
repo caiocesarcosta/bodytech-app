@@ -55,6 +55,8 @@ dependencies {
     implementation(Dep.composeUiGraphics)
     implementation(Dep.composeUiToolingPreview)
     implementation(Dep.composeMaterial3)
+    implementation(Dep.gson)
+    implementation(Dep.firebaseAuth)
 
     testImplementation(TestDep.junit)
     androidTestImplementation(TestDep.extJunit)

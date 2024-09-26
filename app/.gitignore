@@ -1,1 +1,27 @@
-/build
+# Arquivos gerados pelo Android Studio
+.idea/
+*.iml
+.gradle/
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+*.iws
+out/
+build/
+
+# Arquivos específicos do Kotlin
+*.hprof
+
+# Arquivos de cache do Proguard
+proguard/
+
+# Arquivos gerados pelo Firebase
+google-services.json
+**/google-services.json
+
+# Outros arquivos temporários
+*.log
+*.DS_Store
+
+# Arquivos específicos do seu projeto (adicione se necessário)
+# ...

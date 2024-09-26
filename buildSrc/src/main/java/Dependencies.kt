@@ -24,6 +24,8 @@ object Versions {
     const val composeOptionKotlinCompilerVersion = "1.5.9"
     const val firebaseBomVersion = "32.3.1" // Versão do Firebase BOM
     const val firebaseFirestoreKtxVersion = "24.9.1" // Versão do Firestore
+    const val gsonVersion = "2.10.1"
+    const val firebaseAuthKtxVersion = "22.1.1"
 }
 
 object Dep {
@@ -41,6 +43,9 @@ object Dep {
     const val composeMaterial3 = "androidx.compose.material3:material3:${Versions.composeMaterial3Version}"
     const val firebaseBom = "com.google.firebase:firebase-bom:${Versions.firebaseBomVersion}" // Firebase BOM
     const val firebaseFirestore = "com.google.firebase:firebase-firestore-ktx:${Versions.firebaseFirestoreKtxVersion}" // Firestore
+    const val gson = "com.google.code.gson:gson:${Versions.gsonVersion}"
+    const val firebaseAuth = "com.google.firebase:firebase-auth-ktx:${Versions.firebaseAuthKtxVersion}"
+
 }
 
 object TestDep {

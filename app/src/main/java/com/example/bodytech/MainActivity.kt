@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.bodytech.ui.theme.BodyTechTheme
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -27,6 +28,21 @@ import kotlinx.coroutines.tasks.await
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this) // Inicializa o Firebase
+
+
+        val auth = Firebase.auth
+        auth.signInAnonymously()
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Autenticação anônima bem-sucedida, agora você pode criar os dados no Firestore
+                    createFirestoreData() // Chama a função para criar os dados
+                    Log.d("MainActivity", "Autenticação anônima bem-sucedida!")
+                } else {
+                    // Trate o erro de autenticação
+                    Log.w("MainActivity", "Falha na autenticação anônima", task.exception)
+                }
+            }
 
         setContent {
             BodyTechTheme {
@@ -35,23 +51,6 @@ class MainActivity : ComponentActivity() {
                 BodyTechApp()
             }
         }
-        val auth = Firebase.auth
-        auth.signInAnonymously()
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Autenticação anônima bem-sucedida, agora você pode criar os dados no Firestore
-                    Log.d("MainActivity", "Autenticação anônima bem-sucedida!")
-                    createFirestoreData() // Chama a função para criar os dados
-                    setContent {
-                        BodyTechTheme {
-                            BodyTechApp()
-                        }
-                    }
-                } else {
-                    // Trate o erro de autenticação
-                    Log.w("MainActivity", "Falha na autenticação anônima", task.exception)
-                }
-            }
     }
 
     @Composable
@@ -87,6 +86,8 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun createFirestoreData() {
+
+
         CoroutineScope(Dispatchers.IO).launch { // Use Dispatchers.IO para operações de I/O
             val db = Firebase.firestore
 

@@ -5,4 +5,4 @@ data class Company(
     val address: String? = null,
     val contact: String? = null
     // ... adicione outros campos relevantes para a empresa
-)
+) 

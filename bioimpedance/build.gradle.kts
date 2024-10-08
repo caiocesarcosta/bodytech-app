@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("com.google.dagger.hilt.android") version "2.48" apply false
 }
 
 android {
@@ -51,6 +52,17 @@ dependencies {
     implementation(Dep.composeUiGraphics)
     implementation(Dep.composeUiToolingPreview)
     implementation(Dep.composeMaterial3)
+
+    implementation(Dep.hiltAndroid)
+    implementation(Dep.retrofit)
+    implementation(Dep.retrofitGsonConverter)
+    implementation(Dep.coroutinesAndroid)
+    implementation(Dep.lifecycleViewModelCompose)
+    implementation(Dep.navigationCompose)
+    implementation(Dep.hiltNavigationCompose)
+
+
+//    kapt(Dep.hiltAndroidCompiler)
 
     testImplementation(TestDep.junit)
     androidTestImplementation(TestDep.extJunit)

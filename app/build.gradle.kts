@@ -2,7 +2,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.gms.google-services") version "4.4.0"
+    id("com.google.dagger.hilt.android") version "2.48" apply false
 }
+
 
 android {
     namespace = "com.example.bodytech" // Substitua pelo seu namespace
@@ -21,7 +23,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -40,10 +45,12 @@ android {
     }
 }
 
+
 dependencies {
-    // Firebase - Declaração do BOM e do Firestore
+// Firebase - Declaração do BOM e do Firestore
     implementation(platform(Dep.firebaseBom))
     implementation(Dep.firebaseFirestore)
+    implementation(Dep.firebaseAuth)
 
     implementation(platform(Dep.composeBom))
     implementation(Dep.coreKtx)
@@ -57,7 +64,18 @@ dependencies {
     implementation(Dep.composeUiToolingPreview)
     implementation(Dep.composeMaterial3)
     implementation(Dep.gson)
-    implementation(Dep.firebaseAuth)
+
+    implementation(Dep.hiltAndroid)
+    implementation(Dep.retrofit)
+    implementation(Dep.retrofitGsonConverter)
+    implementation(Dep.coroutinesAndroid)
+    implementation(Dep.lifecycleViewModelCompose)
+    implementation(Dep.navigationCompose)
+    implementation(Dep.hiltNavigationCompose)
+
+
+//    kapt(Dep.hiltAndroidCompiler)
+
 
     testImplementation(TestDep.junit)
     androidTestImplementation(TestDep.extJunit)

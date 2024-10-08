@@ -1,0 +1,20 @@
+[
+  {
+    "companyId": "beautyCompany123",
+    "name": "Beauty Company",
+    "address": "123 Flower Street",
+    "contact": "contact@beautycompany.com"
+  },
+  {
+    "companyId": "gymCompany456",
+    "name": "Gym Company X",
+    "address": "456 Main Avenue",
+    "contact": "contact@gymcompanyX.com"
+  },
+  {
+    "companyId": "nutritionCompany789",
+    "name": "Nutrition Center Z",
+    "address": "789 Health Plaza",
+    "contact": "contact@nutritioncenterZ.com"
+  }
+]

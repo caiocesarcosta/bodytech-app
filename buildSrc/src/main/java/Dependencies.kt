@@ -26,6 +26,13 @@ object Versions {
     const val firebaseFirestoreKtxVersion = "24.9.1" // Versão do Firestore
     const val gsonVersion = "2.10.1"
     const val firebaseAuthKtxVersion = "22.1.1"
+    const val hiltAndroidVersion = "2.48"
+    const val retrofitVersion = "2.9.0"
+    const val retrofitGsonConverterVersion = "2.9.0"
+    const val coroutinesAndroidVersion = "1.7.3"
+    const val lifecycleViewModelComposeVersion = "2.6.2"
+    const val navigationComposeVersion = "2.7.5"
+    const val hiltNavigationComposeVersion = "1.0.0"
 }
 
 object Dep {
@@ -45,6 +52,14 @@ object Dep {
     const val firebaseFirestore = "com.google.firebase:firebase-firestore-ktx:${Versions.firebaseFirestoreKtxVersion}" // Firestore
     const val gson = "com.google.code.gson:gson:${Versions.gsonVersion}"
     const val firebaseAuth = "com.google.firebase:firebase-auth-ktx:${Versions.firebaseAuthKtxVersion}"
+    const val hiltAndroid = "com.google.dagger:hilt-android:${Versions.hiltAndroidVersion}" // Hilt Android
+    const val hiltAndroidCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hiltAndroidVersion}" // Hilt Compiler
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
+    const val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofitGsonConverterVersion}"
+    const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesAndroidVersion}"
+    const val lifecycleViewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycleViewModelComposeVersion}"
+    const val navigationCompose = "androidx.navigation:navigation-compose:${Versions.navigationComposeVersion}"
+    const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationComposeVersion}"
 
 }
 

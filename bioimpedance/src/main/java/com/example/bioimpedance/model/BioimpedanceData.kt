@@ -7,5 +7,5 @@ data class BioimpedanceData(
     val weight: Double? = null,
     val height: Double? = null,
     val bmi: Double? = null
-    // ... outras métricas
+    // ... outras métricas relevantes
 )

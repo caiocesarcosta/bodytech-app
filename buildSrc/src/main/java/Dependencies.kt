@@ -33,6 +33,8 @@ object Versions {
     const val lifecycleViewModelComposeVersion = "2.6.2"
     const val navigationComposeVersion = "2.7.5"
     const val hiltNavigationComposeVersion = "1.0.0"
+    const val composeRuntimeLivedataVersion = "1.5.4"
+    const val hiltNavigationFragmentVersion = "1.0.0"
 }
 
 object Dep {
@@ -60,6 +62,8 @@ object Dep {
     const val lifecycleViewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycleViewModelComposeVersion}"
     const val navigationCompose = "androidx.navigation:navigation-compose:${Versions.navigationComposeVersion}"
     const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationComposeVersion}"
+    const val composeRuntimeLivedata ="androidx.compose.runtime:runtime-livedata:${Versions.composeRuntimeLivedataVersion}"
+    const val hiltNavigationFragment ="androidx.hilt:hilt-navigation-fragment:${Versions.hiltNavigationFragmentVersion}"
 
 }
 

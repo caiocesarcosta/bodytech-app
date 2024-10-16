@@ -1,7 +1,8 @@
 plugins {
+    id("kotlin-kapt")
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("com.google.dagger.hilt.android") version "2.48" apply false
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -38,6 +39,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.composeOptionKotlinCompilerVersion
     }
+
+    // Permitir referências ao código gerado
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -53,16 +59,19 @@ dependencies {
     implementation(Dep.composeUiToolingPreview)
     implementation(Dep.composeMaterial3)
 
+    //DI
+    kapt(Dep.hiltAndroidCompiler)
     implementation(Dep.hiltAndroid)
+
+
     implementation(Dep.retrofit)
     implementation(Dep.retrofitGsonConverter)
     implementation(Dep.coroutinesAndroid)
     implementation(Dep.lifecycleViewModelCompose)
     implementation(Dep.navigationCompose)
     implementation(Dep.hiltNavigationCompose)
-
-
-//    kapt(Dep.hiltAndroidCompiler)
+    implementation(Dep.composeRuntimeLivedata)
+    implementation(Dep.hiltNavigationFragment)
 
     testImplementation(TestDep.junit)
     androidTestImplementation(TestDep.extJunit)

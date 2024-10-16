@@ -4,6 +4,6 @@ import androidx.lifecycle.LiveData
 
 interface UserViewModel {
     fun createAllUsersFromJson()
-    val createUsersStatus: LiveData<Result<Unit>>
+    val createUsersStatus: LiveData<CreateUsersState>
 
 }

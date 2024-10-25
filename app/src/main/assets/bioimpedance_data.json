@@ -1,0 +1,32 @@
+[
+  {
+    "userId": "user1", 
+    "companyId": "beautyCompany123", 
+    "date": "2023-11-08T15:00:00Z",
+    "weight": 65.2,
+    "height": 1.68,
+    "bmi": 23.1,
+    "bodyFat": 25.5, 
+    "muscleMass": 48.0 
+  },
+  {
+    "userId": "user1", 
+    "companyId": "beautyCompany123",
+    "date": "2023-11-15T16:30:00Z",
+    "weight": 64.5,
+    "height": 1.68,
+    "bmi": 22.8,
+    "bodyFat": 24.8,
+    "muscleMass": 48.5
+  },
+  {
+    "userId": "user2", 
+    "companyId": "gymCompany456", 
+    "date": "2023-11-07T11:00:00Z",
+    "weight": 80.0,
+    "height": 1.80,
+    "bmi": 24.7,
+    "bodyFat": 18.3,
+    "muscleMass": 60.5
+  }
+]

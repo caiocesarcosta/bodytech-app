@@ -1,7 +1,7 @@
 package com.example.bodytech.repository.auth
 
-import com.example.bodytech.model.User
-import com.example.bodytech.model.Company
+import com.example.bodytech.model.user.User
+import com.example.bodytech.model.company.Company
 
 interface AuthRepository {
     suspend fun signInAnonymously(): Result<Boolean>

@@ -1,8 +1,8 @@
 package com.example.bodytech.repository.auth
 
 import android.util.Log
-import com.example.bodytech.model.User
-import com.example.bodytech.model.Company
+import com.example.bodytech.model.user.User
+import com.example.bodytech.model.company.Company
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore

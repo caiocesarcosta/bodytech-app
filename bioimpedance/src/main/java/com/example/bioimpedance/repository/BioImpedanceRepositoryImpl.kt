@@ -1,0 +1,90 @@
+package com.example.bioimpedance.repository
+
+import android.content.Context
+import android.util.Log
+import com.example.bioimpedance.model.BioImpedanceData
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
+
+class BioImpedanceRepositoryImpl @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+) : BioImpedanceRepository {
+
+    private val db = Firebase.firestore
+    private val auth = Firebase.auth
+
+    override suspend fun createAllBioImpedanceDataFromJson(): Result<Unit> {
+        return withContext(ioDispatcher) { // Executa no dispatcher de I/O
+            try {
+                // Carrega os dados do arquivo JSON
+                val jsonFileString = context.assets.open("bioimpedance_data.json").bufferedReader().use { it.readText() }
+                val bioimpedanceDataType = object : TypeToken<List<BioImpedanceData>>() {}.type
+                val bioimpedanceDataList = Gson().fromJson<List<BioImpedanceData>>(jsonFileString, bioimpedanceDataType)
+
+                // Itera pelos dados de bioimpedância e cria os documentos no Firestore
+                for (bioimpedanceData in bioimpedanceDataList) {
+                    db.collection("users")
+                        .document(bioimpedanceData.userId!!)
+                        .collection("aestheticsData")
+                        .document(bioimpedanceData.companyId!!)
+                        .collection("bioimpedanceData")
+                        .add(bioimpedanceData)
+                        .await()
+
+                    Log.d("BioimpedanceRepository", "Dados de bioimpedância para usuário ${bioimpedanceData.userId} e empresa ${bioimpedanceData.companyId} criados com sucesso!")
+                }
+                Result.success(Unit)
+            } catch (e: Exception) {
+                Log.e("BioimpedanceRepository", "Erro ao criar dados de bioimpedância", e)
+                Result.failure(e)
+            }
+        }
+    }
+
+    override suspend fun saveBioImpedanceData(data: BioImpedanceData): Result<Unit> {
+        return withContext(ioDispatcher) { // Executa no dispatcher de I/O
+            try {
+                val currentUser = auth.currentUser ?: throw Exception("Usuário não autenticado")
+                val userId = currentUser.uid
+
+                val companyId = getCompanyIdForCurrentUser() ?: throw Exception("Empresa não encontrada")
+
+                db.collection("users")
+                    .document(userId)
+                    .collection("aestheticsData")
+                    .document(companyId)
+                    .collection("bioimpedanceData")
+                    .add(data)
+                    .await() // Aguarda a conclusão da operação no Firestore
+
+                Log.d("BioimpedanceRepository", "Dados de bioimpedância salvos com sucesso!")
+                Result.success(Unit)
+            } catch (e: Exception) {
+                Log.e("BioimpedanceRepository", "Erro ao salvar dados de bioimpedância: ${e.message}", e)
+                Result.failure(e)
+            }
+        }
+    }
+
+    override suspend fun getCompanyIdForCurrentUser(): String? {
+        return withContext(ioDispatcher) {
+
+            // 1. Obtenha o UID do usuário atual
+            // 2. Consulte a coleção "users" para encontrar o documento do usuário
+            // 3. Acesse o campo "companies" no documento do usuário
+            // 4. Retorne o ID da empresa relevante (por exemplo, o primeiro ID da lista)
+            return@withContext null
+        }
+    }
+}
+

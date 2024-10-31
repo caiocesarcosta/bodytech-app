@@ -1,4 +1,4 @@
-package com.example.bodytech.model
+package com.example.bodytech.model.user
 
 data class User(
     val userId: String? = null,

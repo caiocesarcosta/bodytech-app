@@ -1,10 +1,10 @@
 package com.example.bodytech.ui // Ajuste o pacote, se necessário
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,8 +17,10 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.bioimpedance.ui.BioImpedanceActivity
 import com.example.bodytech.ui.theme.BodyTechTheme
 import com.example.bodytech.viewmodel.user.CreateUsersState
 import com.example.bodytech.viewmodel.user.UserViewModel
@@ -26,7 +28,6 @@ import com.example.bodytech.viewmodel.user.UserViewModelImp
 import com.google.firebase.FirebaseApp
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -45,7 +46,8 @@ class MainActivity : ComponentActivity() {
 
             BodyTechTheme {
                 Log.d("TAG", "BodyTechTheme")
-                MainScreenContent()
+//                mainScreenContent()
+                NavigateToBioimpedanceScreen()
 //                bodyTechApp()
             }
         }
@@ -66,8 +68,7 @@ class MainActivity : ComponentActivity() {
 
 
     @Composable
-    fun MainScreenContent(userViewModel: UserViewModel = hiltViewModel<UserViewModelImp>()) {
-//    fun MainScreenContent() {
+    fun mainScreenContent(userViewModel: UserViewModel = hiltViewModel<UserViewModelImp>()) {
         val coroutineScope = rememberCoroutineScope()
         val createUsersStatus by userViewModel.createUsersStatus.observeAsState(initial = CreateUsersState.Idle)
 
@@ -101,6 +102,20 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+    }
+
+    @Composable
+    fun NavigateToBioimpedanceScreen() {
+        val context = LocalContext.current
+        Button(
+            onClick = {
+                val intent = Intent(context, BioImpedanceActivity::class.java)
+                context.startActivity(intent)
+            },
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text("Abrir Bioimpedância")
+        }
     }
 
 }

@@ -2,7 +2,7 @@ package com.example.bodytech.repository.user
 
 import android.content.Context
 import android.util.Log
-import com.example.bodytech.model.User
+import com.example.bodytech.model.user.User
 import com.google.common.reflect.TypeToken
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore

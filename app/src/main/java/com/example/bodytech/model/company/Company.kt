@@ -1,4 +1,4 @@
-package com.example.bodytech.model
+package com.example.bodytech.model.company
 data class Company(
     val companyId: String? = null,
     val name: String? = null,

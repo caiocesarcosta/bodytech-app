@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name="com.example.bioimpedance.BioimpedanceActivity"
+            android:name="com.example.bioimpedance.ui.BioImpedanceActivity"
             android:exported="true" />
     </application>
 </manifest>

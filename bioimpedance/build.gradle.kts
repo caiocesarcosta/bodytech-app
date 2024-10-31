@@ -47,6 +47,11 @@ android {
 }
 
 dependencies {
+
+    implementation(platform(Dep.firebaseBom))
+    implementation(Dep.firebaseFirestore)
+    implementation(Dep.firebaseAuth)
+
     implementation(platform(Dep.composeBom))
     implementation(Dep.coreKtx)
     implementation(Dep.lifecycleRuntimeKtx)
@@ -60,8 +65,8 @@ dependencies {
     implementation(Dep.composeMaterial3)
 
     //DI
-    kapt(Dep.hiltAndroidCompiler)
     implementation(Dep.hiltAndroid)
+    kapt(Dep.hiltAndroidCompiler)
 
 
     implementation(Dep.retrofit)

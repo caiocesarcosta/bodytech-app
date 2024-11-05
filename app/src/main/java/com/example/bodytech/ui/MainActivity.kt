@@ -22,6 +22,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bioimpedance.ui.BioImpedanceActivity
 import com.example.bodytech.ui.theme.BodyTechTheme
+import com.example.bodytech.viewmodel.company.CompanyViewModel
+import com.example.bodytech.viewmodel.company.CompanyViewModelImpl
+import com.example.bodytech.viewmodel.company.CreateCompanyState
 import com.example.bodytech.viewmodel.user.CreateUsersState
 import com.example.bodytech.viewmodel.user.UserViewModel
 import com.example.bodytech.viewmodel.user.UserViewModelImp
@@ -46,9 +49,9 @@ class MainActivity : ComponentActivity() {
 
             BodyTechTheme {
                 Log.d("TAG", "BodyTechTheme")
-//                mainScreenContent()
-                NavigateToBioimpedanceScreen()
-//                bodyTechApp()
+//                CreateUsersBtnContent()
+                createCompaniesBtnContent()
+//                NavigateToBioimpedanceScreen()
             }
         }
     }
@@ -68,7 +71,7 @@ class MainActivity : ComponentActivity() {
 
 
     @Composable
-    fun mainScreenContent(userViewModel: UserViewModel = hiltViewModel<UserViewModelImp>()) {
+    fun CreateUsersBtnContent(userViewModel: UserViewModel = hiltViewModel<UserViewModelImp>()) {
         val coroutineScope = rememberCoroutineScope()
         val createUsersStatus by userViewModel.createUsersStatus.observeAsState(initial = CreateUsersState.Idle)
 
@@ -98,6 +101,42 @@ class MainActivity : ComponentActivity() {
 
                 CreateUsersState.Idle -> {}
                 CreateUsersState.Loading -> {}
+                else -> {}
+            }
+        }
+
+    }
+    @Composable
+    fun createCompaniesBtnContent(companiesViewModel: CompanyViewModel = hiltViewModel<CompanyViewModelImpl>()) {
+        val coroutineScope = rememberCoroutineScope()
+        val createCompanyState by companiesViewModel.createCompaniesStatus.observeAsState(initial = CreateCompanyState.Idle)
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Button(onClick = {
+                coroutineScope.launch {
+                    companiesViewModel.createAllCompaniesFromJson()
+                }
+            }) {
+                Text("Criar Companies no Firestore")
+            }
+
+            when (createCompanyState) {
+                is CreateCompanyState.Success -> {
+                    Text("Companies criados com sucesso!")
+                }
+
+                is CreateCompanyState.Failure -> {
+                    Text("Erro ao criar Companies: ${(createCompanyState as CreateUsersState.Failure).exception?.message}")
+                }
+
+                CreateCompanyState.Idle -> {}
+                CreateCompanyState.Loading -> {}
                 else -> {}
             }
         }

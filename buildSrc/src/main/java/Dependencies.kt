@@ -35,6 +35,7 @@ object Versions {
     const val hiltNavigationComposeVersion = "1.0.0"
     const val composeRuntimeLivedataVersion = "1.5.4"
     const val hiltNavigationFragmentVersion = "1.0.0"
+    const val roomRuntimeVersion = "2.5.2"
 }
 
 object Dep {
@@ -64,6 +65,10 @@ object Dep {
     const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationComposeVersion}"
     const val composeRuntimeLivedata ="androidx.compose.runtime:runtime-livedata:${Versions.composeRuntimeLivedataVersion}"
     const val hiltNavigationFragment ="androidx.hilt:hilt-navigation-fragment:${Versions.hiltNavigationFragmentVersion}"
+    const val roomRuntime ="androidx.room:room-runtime:${Versions.roomRuntimeVersion}"
+    const val roomktx ="androidx.room:room-ktx:${Versions.roomRuntimeVersion}"
+    const val roomCompiler ="androidx.room:room-compiler:${Versions.roomRuntimeVersion}"
+
 
 }
 

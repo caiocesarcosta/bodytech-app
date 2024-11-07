@@ -68,7 +68,13 @@ dependencies {
     implementation(Dep.hiltAndroid)
     kapt(Dep.hiltAndroidCompiler)
 
+    //Room
+    kapt(Dep.roomCompiler)
+    implementation(Dep.roomktx)
+    implementation(Dep.roomRuntime)
 
+
+    // Test
     implementation(Dep.retrofit)
     implementation(Dep.retrofitGsonConverter)
     implementation(Dep.coroutinesAndroid)

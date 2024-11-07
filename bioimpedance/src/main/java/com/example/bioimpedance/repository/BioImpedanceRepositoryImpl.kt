@@ -33,11 +33,7 @@ class BioImpedanceRepositoryImpl @Inject constructor(
 
                 // Itera pelos dados de bioimpedância e cria os documentos no Firestore
                 for (bioimpedanceData in bioimpedanceDataList) {
-                    db.collection("users")
-                        .document(bioimpedanceData.userId!!)
-                        .collection("aestheticsData")
-                        .document(bioimpedanceData.companyId!!)
-                        .collection("bioimpedanceData")
+                    db.collection("bioimpedance_data") // Coleção independente
                         .add(bioimpedanceData)
                         .await()
 

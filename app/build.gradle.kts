@@ -84,10 +84,13 @@ dependencies {
     implementation(Dep.composeRuntimeLivedata)
     implementation(Dep.hiltNavigationFragment)
 
+    //Room
+    kapt(Dep.roomCompiler)
+    implementation(Dep.roomktx)
+    implementation(Dep.roomRuntime)
 
 
-
-
+    // Test
     testImplementation(TestDep.junit)
     androidTestImplementation(TestDep.extJunit)
     androidTestImplementation(TestDep.espressoCore)
@@ -95,5 +98,7 @@ dependencies {
     androidTestImplementation(TestDep.composeUiTestJunit4)
     debugImplementation(TestDep.uiTooling)
     debugImplementation(TestDep.uiTestManifest)
+
+    //open module bioimpedance
     implementation(project(":bioimpedance"))
 }

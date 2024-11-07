@@ -50,8 +50,8 @@ class MainActivity : ComponentActivity() {
             BodyTechTheme {
                 Log.d("TAG", "BodyTechTheme")
 //                CreateUsersBtnContent()
-                createCompaniesBtnContent()
-//                NavigateToBioimpedanceScreen()
+//                createCompaniesBtnContent()
+                NavigateToBioimpedanceScreen()
             }
         }
     }

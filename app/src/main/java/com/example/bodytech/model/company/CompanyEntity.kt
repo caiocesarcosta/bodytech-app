@@ -1,7 +1,11 @@
 package com.example.bodytech.model.company
 
-data class Company(
-    val companyId: String? = null,
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "companies")
+data class CompanyEntity(
+    @PrimaryKey val companyId: String? = null,
     val name: String? = null,
     val address: String? = null,
     val contact: String? = null,

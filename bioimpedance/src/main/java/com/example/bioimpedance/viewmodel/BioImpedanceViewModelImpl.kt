@@ -1,6 +1,5 @@
 package com.example.bioimpedance.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.bioimpedance.model.BioImpedanceData
 import com.example.bioimpedance.repository.BioImpedanceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,26 +16,26 @@ class BioImpedanceViewModelImpl @Inject constructor(
 ) : ViewModel(), BioImpedanceViewModel {
 
     private val _createBioImpedanceDataStatus =
-        MutableLiveData<CreateCompanieState>(CreateCompanieState.Idle)
+        MutableLiveData<CreateBioImpedanceState>(CreateBioImpedanceState.Idle)
 
-    override val createBioimpedanceDataStatus: LiveData<CreateCompanieState> =
+    override val createBioimpedanceDataStatus: LiveData<CreateBioImpedanceState> =
         _createBioImpedanceDataStatus
 
-    private val _saveStatus = MutableLiveData<SaveCompanieState>(SaveCompanieState.Idle)
+    private val _saveStatus = MutableLiveData<SaveCreateBioImpedanceState>(SaveCreateBioImpedanceState.Idle)
 
-    override val saveStatus: LiveData<SaveCompanieState> = _saveStatus
+    override val saveStatus: LiveData<SaveCreateBioImpedanceState> = _saveStatus
 
 
     override fun createAllBioImpedanceDataFromJson() {
         viewModelScope.launch {
-            _createBioImpedanceDataStatus.value = CreateCompanieState.Loading
+            _createBioImpedanceDataStatus.value = CreateBioImpedanceState.Loading
 
             val result = bioImpedanceRepository.createAllBioImpedanceDataFromJson()
 
             _createBioImpedanceDataStatus.value = if (result.isSuccess) {
-                CreateCompanieState.Success
+                CreateBioImpedanceState.Success
             } else {
-                CreateCompanieState.Failure(result.exceptionOrNull())
+                CreateBioImpedanceState.Failure(result.exceptionOrNull())
             }
         }
     }
@@ -45,15 +43,15 @@ class BioImpedanceViewModelImpl @Inject constructor(
     override fun saveBioImpedanceData(data: BioImpedanceData) {
         viewModelScope.launch {
 
-            _saveStatus.value = SaveCompanieState.Loading
+            _saveStatus.value = SaveCreateBioImpedanceState.Loading
 
             val saveSuccess = bioImpedanceRepository.saveBioImpedanceData(data)
 
             _saveStatus.value = if (saveSuccess.isSuccess) {
-                SaveCompanieState.Success
+                SaveCreateBioImpedanceState.Success
 
             } else {
-                SaveCompanieState.Failure(saveSuccess.exceptionOrNull())
+                SaveCreateBioImpedanceState.Failure(saveSuccess.exceptionOrNull())
             }
 
         }
@@ -61,16 +59,16 @@ class BioImpedanceViewModelImpl @Inject constructor(
 
 }
 
-sealed class CreateCompanieState {
-    object Idle : CreateCompanieState()
-    object Loading : CreateCompanieState()
-    object Success : CreateCompanieState()
-    data class Failure(val exception: Throwable?) : CreateCompanieState()
+sealed class CreateBioImpedanceState {
+    object Idle : CreateBioImpedanceState()
+    object Loading : CreateBioImpedanceState()
+    object Success : CreateBioImpedanceState()
+    data class Failure(val exception: Throwable?) : CreateBioImpedanceState()
 }
 
-sealed class SaveCompanieState {
-    object Idle : SaveCompanieState()
-    object Loading : SaveCompanieState()
-    object Success : SaveCompanieState()
-    data class Failure(val exception: Throwable?) : SaveCompanieState()
+sealed class SaveCreateBioImpedanceState {
+    object Idle : SaveCreateBioImpedanceState()
+    object Loading : SaveCreateBioImpedanceState()
+    object Success : SaveCreateBioImpedanceState()
+    data class Failure(val exception: Throwable?) : SaveCreateBioImpedanceState()
 }

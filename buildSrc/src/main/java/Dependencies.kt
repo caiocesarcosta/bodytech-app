@@ -27,6 +27,7 @@ object Versions {
     const val gsonVersion = "2.10.1"
     const val firebaseAuthKtxVersion = "22.1.1"
     const val hiltAndroidVersion = "2.48"
+    const val hiltNavigationFragmentVersion = "1.0.0"
     const val retrofitVersion = "2.9.0"
     const val retrofitGsonConverterVersion = "2.9.0"
     const val coroutinesAndroidVersion = "1.7.3"
@@ -34,7 +35,6 @@ object Versions {
     const val navigationComposeVersion = "2.7.5"
     const val hiltNavigationComposeVersion = "1.0.0"
     const val composeRuntimeLivedataVersion = "1.5.4"
-    const val hiltNavigationFragmentVersion = "1.0.0"
     const val roomRuntimeVersion = "2.5.2"
 }
 

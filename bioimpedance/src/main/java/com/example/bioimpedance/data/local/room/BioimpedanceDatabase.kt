@@ -1,4 +1,4 @@
-package com.example.bioimpedance.data.room
+package com.example.bioimpedance.data.local.room
 
 import android.content.Context
 import android.os.Build
@@ -10,10 +10,13 @@ import androidx.room.TypeConverters
 import com.example.bioimpedance.model.BioimpedanceDataEntity
 import java.time.OffsetDateTime
 
-@Database(entities = [BioimpedanceDataEntity::class], version = 1, exportSchema = false)
+@Database(
+    entities = [BioimpedanceDataEntity::class],
+    version = 1,
+    exportSchema = false
+)
 @TypeConverters(Converters::class)
 abstract class BioimpedanceDatabase : RoomDatabase() {
-
     abstract fun bioimpedanceDataDao(): BioimpedanceDataDao
 
     companion object {
@@ -21,14 +24,18 @@ abstract class BioimpedanceDatabase : RoomDatabase() {
         private var INSTANCE: BioimpedanceDatabase? = null
 
         fun getDatabase(context: Context): BioimpedanceDatabase {
-            return INSTANCE ?: synchronized(this) {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
+            }
+            synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context,
+                    context.applicationContext,
                     BioimpedanceDatabase::class.java,
-                    "bioimpedance_database"
+                    "bioimpedance_data"
                 ).build()
                 INSTANCE = instance
-                instance
+                return instance
             }
         }
     }

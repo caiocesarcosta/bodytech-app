@@ -5,7 +5,7 @@ import com.example.bioimpedance.model.BioImpedanceData
 
 interface BioImpedanceViewModel {
     fun createAllBioImpedanceDataFromJson()
-    val createBioimpedanceDataStatus: LiveData<CreateCompanieState>
+    val createBioimpedanceDataStatus: LiveData<CreateBioImpedanceState>
     fun saveBioImpedanceData(data: BioImpedanceData)
-    val saveStatus: LiveData<SaveCompanieState>
+    val saveStatus: LiveData<SaveCreateBioImpedanceState>
 }

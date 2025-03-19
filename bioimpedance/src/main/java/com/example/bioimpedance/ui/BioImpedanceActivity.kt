@@ -20,7 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.bioimpedance.ui.theme.BodyTechTheme
 import com.example.bioimpedance.viewmodel.BioImpedanceViewModel
 import com.example.bioimpedance.viewmodel.BioImpedanceViewModelImpl
-import com.example.bioimpedance.viewmodel.CreateCompanieState
+import com.example.bioimpedance.viewmodel.CreateBioImpedanceState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -44,8 +44,8 @@ fun bioImpedanceScreen(bioImpedanceViewModel: BioImpedanceViewModel = hiltViewMo
     // Implemente a interface do seu módulo de bioimpedância aqui (campos, botões, etc.)
 
     val coroutineScope = rememberCoroutineScope()
-    val createCompanieState by bioImpedanceViewModel.createBioimpedanceDataStatus.observeAsState(
-        initial = CreateCompanieState.Idle
+    val createBioImpedanceState by bioImpedanceViewModel.createBioimpedanceDataStatus.observeAsState(
+        initial = CreateBioImpedanceState.Idle
     )
 
     Column(
@@ -63,17 +63,17 @@ fun bioImpedanceScreen(bioImpedanceViewModel: BioImpedanceViewModel = hiltViewMo
             Text("Criar data BioImpedance no Firestore")
         }
 
-        when (createCompanieState) {
-            is CreateCompanieState.Success -> {
+        when (createBioImpedanceState) {
+            is CreateBioImpedanceState.Success -> {
                 Text("BioImpedanceData criados com sucesso!")
             }
 
-            is CreateCompanieState.Failure -> {
-                Text("Erro ao criar BioImpedanceData: ${(createCompanieState as CreateCompanieState.Failure).exception?.message}")
+            is CreateBioImpedanceState.Failure -> {
+                Text("Erro ao criar BioImpedanceData: ${(createBioImpedanceState as CreateBioImpedanceState.Failure).exception?.message}")
             }
 
-            CreateCompanieState.Idle -> {}
-            CreateCompanieState.Loading -> {}
+            CreateBioImpedanceState.Idle -> {}
+            CreateBioImpedanceState.Loading -> {}
             else -> {}
         }
     }

@@ -1,8 +1,9 @@
 plugins {
-    id("kotlin-kapt")
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -69,9 +70,10 @@ dependencies {
     kapt(Dep.hiltAndroidCompiler)
 
     //Room
-    kapt(Dep.roomCompiler)
+    ksp(Dep.roomCompiler)
     implementation(Dep.roomktx)
     implementation(Dep.roomRuntime)
+    annotationProcessor(Dep.roomRuntime)
 
 
     // Test

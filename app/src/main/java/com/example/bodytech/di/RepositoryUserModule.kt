@@ -2,8 +2,8 @@ package com.example.bodytech.di
 
 import com.example.bodytech.repository.company.CompanyRepository
 import com.example.bodytech.repository.company.CompanyRepositoryImpl
-import com.example.bodytech.repository.user.UserRepository
-import com.example.bodytech.repository.user.UserRepositoryImp
+import com.example.bodytech.repository.user.remote.UserRepository
+import com.example.bodytech.repository.user.remote.UserRepositoryImp
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

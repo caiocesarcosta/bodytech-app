@@ -1,11 +1,11 @@
 plugins {
-    id("kotlin-kapt")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
     id("com.google.gms.google-services") version "4.4.0"
     id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
-
 
 android {
     namespace = "com.example.bodytech" // Substitua pelo seu namespace
@@ -44,13 +44,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = Versions.composeOptionKotlinCompilerVersion
     }
-
     // Permitir referências ao código gerado
     kapt {
         correctErrorTypes = true
     }
 }
-
 
 dependencies {
 // Firebase - Declaração do BOM e do Firestore
@@ -73,6 +71,7 @@ dependencies {
 
     //DI
     implementation(Dep.hiltAndroid)
+    implementation("androidx.databinding:adapters:3.2.0-alpha11")
     kapt(Dep.hiltAndroidCompiler)
 
     implementation(Dep.retrofit)
@@ -85,9 +84,10 @@ dependencies {
     implementation(Dep.hiltNavigationFragment)
 
     //Room
-    kapt(Dep.roomCompiler)
+    ksp(Dep.roomCompiler)
     implementation(Dep.roomktx)
     implementation(Dep.roomRuntime)
+    annotationProcessor(Dep.roomRuntime)
 
 
     // Test

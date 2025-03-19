@@ -1,26 +1,24 @@
-package com.example.bioimpedance.data.room
-
+package com.example.bioimpedance.data.local.room
 
 import androidx.room.*
 import com.example.bioimpedance.model.BioimpedanceDataEntity
 import kotlinx.coroutines.flow.Flow
-import java.util.*
+
 
 @Dao
 interface BioimpedanceDataDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(bioimpedanceData: BioimpedanceDataEntity)
+    fun insert(bioimpedanceDataEntity: BioimpedanceDataEntity) // Retorna Long (ID da linha inserida)
 
     @Query("SELECT * FROM bioimpedance_data WHERE userId = :userId AND companyId = :companyId")
     fun getAllByUserIdAndCompanyId(userId: String, companyId: String): Flow<List<BioimpedanceDataEntity>>
 
     @Query("SELECT * FROM bioimpedance_data WHERE bioimpedanceId = :bioimpedanceId")
-    suspend fun getById(bioimpedanceId: UUID): BioimpedanceDataEntity?
+    fun getById(bioimpedanceId: String): BioimpedanceDataEntity // Retorna BioimpedanceDataEntity?
 
     @Update
-    suspend fun update(bioimpedanceData: BioimpedanceDataEntity)
+    fun update(bioimpedanceData: BioimpedanceDataEntity): Int // Retorna Int (número de linhas atualizadas)
 
     @Delete
-    suspend fun delete(bioimpedanceData: BioimpedanceDataEntity)
+    fun delete(bioimpedanceData: BioimpedanceDataEntity): Int // Retorna Int (número de linhas excluídas)
 }

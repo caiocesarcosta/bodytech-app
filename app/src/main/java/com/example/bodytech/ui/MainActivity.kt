@@ -50,8 +50,8 @@ class MainActivity : ComponentActivity() {
             BodyTechTheme {
                 Log.d("TAG", "BodyTechTheme")
 //                CreateUsersBtnContent()
-                createCompaniesBtnContent()
-//                NavigateToBioimpedanceScreen()
+//                createCompaniesBtnContent()
+                NavigateToBioimpedanceScreen()
             }
         }
     }
@@ -134,6 +134,8 @@ class MainActivity : ComponentActivity() {
                 is CreateCompanyState.Failure -> {
                     Text("Erro ao criar Companies: ${(createCompanyState as CreateUsersState.Failure).exception?.message}")
                 }
+
+
 
                 CreateCompanyState.Idle -> {}
                 CreateCompanyState.Loading -> {}

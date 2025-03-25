@@ -1,4 +1,4 @@
-package com.example.bodytech.repository.company
+package com.example.bodytech.repository.company.remote
 
 import android.content.Context
 import android.util.Log

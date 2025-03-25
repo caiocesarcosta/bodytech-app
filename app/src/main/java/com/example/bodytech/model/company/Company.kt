@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "companies")
 data class Company(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "companyId")
-    val companyId: Int? = null,
+    val companyId: String, // Agora é String!
     @ColumnInfo(name = "name")
     val name: String?,
     @ColumnInfo(name = "address")

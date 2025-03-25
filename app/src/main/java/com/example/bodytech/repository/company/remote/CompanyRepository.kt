@@ -1,8 +1,6 @@
-package com.example.bodytech.repository.company
+package com.example.bodytech.repository.company.remote
 
 import com.example.bodytech.model.company.Company
-import com.example.bodytech.viewmodel.company.CreateCompanyState
-import kotlinx.coroutines.flow.Flow
 
 
 interface CompanyRepository {

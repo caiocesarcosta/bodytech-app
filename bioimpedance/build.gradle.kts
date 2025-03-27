@@ -1,9 +1,11 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    id("org.jetbrains.kotlin.plugin.compose")
+//    id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
+
 }
 
 android {
@@ -12,8 +14,6 @@ android {
 
     defaultConfig {
         minSdk = Versions.minSdkVersion
-        targetSdk = Versions.targetSdkVersion
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -28,8 +28,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion. VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = Versions.jvmTarget
@@ -37,14 +37,12 @@ android {
     buildFeatures {
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = Versions.composeOptionKotlinCompilerVersion
-    }
+        composeOptions {
+            kotlinCompilerExtensionVersion = Versions.composeOptionKotlinCompilerVersion
+        }
 
     // Permitir referências ao código gerado
-    kapt {
-        correctErrorTypes = true
-    }
+
 }
 
 dependencies {
@@ -52,13 +50,15 @@ dependencies {
     implementation(platform(Dep.firebaseBom))
     implementation(Dep.firebaseFirestore)
     implementation(Dep.firebaseAuth)
-
+    /*    kapt {
+            correctErrorTypes = true
+        }*/
     implementation(platform(Dep.composeBom))
     implementation(Dep.coreKtx)
     implementation(Dep.lifecycleRuntimeKtx)
-    implementation(Dep.appcompat)
-    implementation(Dep.material)
-    implementation(Dep.constraintLayout)
+//    implementation(Dep.appcompat)
+//    implementation(Dep.material)
+//    implementation(Dep.constraintLayout)
     implementation(Dep.activityCompose)
     implementation(Dep.composeUi)
     implementation(Dep.composeUiGraphics)
@@ -66,14 +66,15 @@ dependencies {
     implementation(Dep.composeMaterial3)
 
     //DI
+    ksp(Dep.hiltAndroidCompiler)
     implementation(Dep.hiltAndroid)
-    kapt(Dep.hiltAndroidCompiler)
 
     //Room
     ksp(Dep.roomCompiler)
     implementation(Dep.roomktx)
     implementation(Dep.roomRuntime)
     annotationProcessor(Dep.roomRuntime)
+//    ksp(Dep.roomCompiler)
 
 
     // Test

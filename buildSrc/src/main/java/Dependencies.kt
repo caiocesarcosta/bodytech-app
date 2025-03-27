@@ -1,19 +1,19 @@
 object Versions {
-    const val kotlinVersion = "1.9.22"
-    const val applicationVersion = "8.2.2"
+//    const val kotlinVersion = "1.9.22"
+//    const val applicationVersion = "8.2.2"
     const val compileSdkVersion = 34
     const val minSdkVersion = 21
     const val targetSdkVersion = 34
     const val versionCode = 1
     const val versionName = "1.0"
-    const val jvmTarget = "1.8"
+    const val jvmTarget = "11"
     const val appcompatVersion = "1.6.1"
     const val constraintLayoutVersion = "2.1.4"
     const val materialVersion = "1.9.0"
     const val junitVersion = "4.13.2"
     const val extJunitVersion = "1.2.1"
     const val espressoVersion = "3.6.1"
-    const val composeBomVersion = "2023.08.00"
+    const val composeBomVersion = "2024.04.00"
     const val testComposeBomVersion = "2023.05.00"
     const val activityComposeVersion = "1.7.0"
     const val composeMaterial3Version = "1.1.2"
@@ -21,25 +21,25 @@ object Versions {
     const val uiToolingVersion = "1.5.1"
     const val lifecycleRuntimeKtxVersion = "2.6.1"
     const val coreKtxVersion = "1.13.1"
-    const val composeOptionKotlinCompilerVersion = "1.5.9"
+    const val composeOptionKotlinCompilerVersion = "2.0.21"
     const val firebaseBomVersion = "32.3.1" // Versão do Firebase BOM
     const val firebaseFirestoreKtxVersion = "24.9.1" // Versão do Firestore
     const val gsonVersion = "2.10.1"
     const val firebaseAuthKtxVersion = "22.1.1"
-    const val hiltAndroidVersion = "2.48"
+    const val hiltAndroidVersion = "2.53"
     const val hiltNavigationFragmentVersion = "1.0.0"
+    const val hiltNavigationComposeVersion = "1.0.0"
     const val retrofitVersion = "2.9.0"
     const val retrofitGsonConverterVersion = "2.9.0"
     const val coroutinesAndroidVersion = "1.7.3"
     const val lifecycleViewModelComposeVersion = "2.6.2"
     const val navigationComposeVersion = "2.7.5"
-    const val hiltNavigationComposeVersion = "1.0.0"
     const val composeRuntimeLivedataVersion = "1.5.4"
-    const val roomRuntimeVersion = "2.5.2"
+    const val roomRuntimeVersion = "2.6.1"
 }
 
 object Dep {
-    const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlinVersion}"
+//    const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlinVersion}"
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompatVersion}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayoutVersion}"
     const val material = "com.google.android.material:material:${Versions.materialVersion}"

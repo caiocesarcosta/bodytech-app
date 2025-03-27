@@ -1,10 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("com.google.gms.google-services") version "4.4.0"
+    id("org.jetbrains.kotlin.plugin.compose")
+//    id("kotlin-kapt")
+    id("com.google.gms.google-services") version "4.4.2"
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
+
 }
 
 android {
@@ -31,8 +33,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = Versions.jvmTarget
@@ -45,9 +47,9 @@ android {
         kotlinCompilerExtensionVersion = Versions.composeOptionKotlinCompilerVersion
     }
     // Permitir referências ao código gerado
-    kapt {
+/*    kapt {
         correctErrorTypes = true
-    }
+    }*/
 }
 
 dependencies {
@@ -70,9 +72,9 @@ dependencies {
     implementation(Dep.gson)
 
     //DI
+    ksp(Dep.hiltAndroidCompiler)
     implementation(Dep.hiltAndroid)
     implementation("androidx.databinding:adapters:3.2.0-alpha11")
-    kapt(Dep.hiltAndroidCompiler)
 
     implementation(Dep.retrofit)
     implementation(Dep.retrofitGsonConverter)
@@ -88,6 +90,7 @@ dependencies {
     implementation(Dep.roomktx)
     implementation(Dep.roomRuntime)
     annotationProcessor(Dep.roomRuntime)
+//    kapt(Dep.roomCompiler)
 
 
     // Test
@@ -101,4 +104,6 @@ dependencies {
 
     //open module bioimpedance
     implementation(project(":bioimpedance"))
+    //open module login
+    implementation(project(":login"))
 }

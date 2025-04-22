@@ -89,6 +89,7 @@ dependencies {
 
     // Coroutines
     implementation(libs.jetbrains.kotlinx.coroutines.android)
+    implementation(libs.jetbrains.kotlinx.coroutines.play.services) // Kotlin Coroutines com Play Services para await()
 
     // Testes Unitários (local)
     testImplementation(libs.test.junit) // Apenas JUnit para testes locais neste módulo

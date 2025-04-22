@@ -39,6 +39,8 @@ lifecycleViewModelCompose = "2.6.2" # -> Considere atualizar
 navigationCompose = "2.7.5" # -> Considere atualizar
 composeRuntimeLivedata = "1.5.4" # -> Considere atualizar
 room = "2.6.1" # -> Verifique compatibilidade
+coroutinesPlayServices = "1.7.3"
+
 
 [libraries]
 # AndroidX Core & UI
@@ -78,6 +80,7 @@ google-code-gson = { module = "com.google.code.gson:gson", version.ref = "gson" 
 
 # Coroutines
 jetbrains-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutinesAndroid" }
+jetbrains-kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "coroutinesPlayServices" }
 
 # Room (Persistence)
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }

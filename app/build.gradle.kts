@@ -107,6 +107,7 @@ dependencies {
 
     // Coroutines
     implementation(libs.jetbrains.kotlinx.coroutines.android)
+    implementation(libs.jetbrains.kotlinx.coroutines.play.services) // Kotlin Coroutines com Play Services para await()
 
     // Room - Persistência
     implementation(libs.bundles.room.runtime) // Bundle para Room runtime e KTX

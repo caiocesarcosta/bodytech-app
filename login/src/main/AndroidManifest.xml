@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name="com.example.login.LoginActivity"
+            android:name="com.example.login.ui.LoginActivity"
             android:exported="true" />
     </application>
 </manifest>

@@ -1,17 +1,19 @@
 [
   {
-    "userId": "user1", 
-    "companyId": "beautyCompany123", 
+    "userId": "firebase_auth_uid_user1",
+    "companyId": "beautyCompany123",
+    "recordId": "bio_rec_user1_20231108_1",
     "date": "2023-11-08T15:00:00Z",
     "weight": 65.2,
     "height": 1.68,
     "bmi": 23.1,
-    "bodyFat": 25.5, 
-    "muscleMass": 48.0 
+    "bodyFat": 25.5,
+    "muscleMass": 48.0
   },
   {
-    "userId": "user1", 
+    "userId": "firebase_auth_uid_user1",
     "companyId": "beautyCompany123",
+    "recordId": "bio_rec_user1_20231115_2",
     "date": "2023-11-15T16:30:00Z",
     "weight": 64.5,
     "height": 1.68,
@@ -20,8 +22,9 @@
     "muscleMass": 48.5
   },
   {
-    "userId": "user2", 
-    "companyId": "gymCompany456", 
+    "userId": "firebase_auth_uid_user2",
+    "companyId": "gymCompany456",
+    "recordId": "bio_rec_user2_20231107_1",
     "date": "2023-11-07T11:00:00Z",
     "weight": 80.0,
     "height": 1.80,

@@ -1,24 +1,23 @@
 [
   {
-    "companyId": "beautyCompany123",
+    "id": "beautyCompany123",
     "name": "Beauty Company",
     "address": "123 Flower Street",
-    "contact": "contact@beautycompany.com",
+    "contactEmail": "contact@beautycompany.com",
     "services": ["massagem", "drenagem linfática", "limpeza de pele", "depilação"]
   },
   {
-    "companyId": "gymCompany456",
+    "id": "gymCompany456",
     "name": "Gym Company X",
     "address": "456 Main Avenue",
-    "contact": "contact@gymcompanyX.com",
+    "contactEmail": "contact@gymcompanyX.com",
     "services": ["musculação", "crossfit", "yoga", "pilates"]
   },
   {
-    "companyId": "nutritionCompany789",
+    "id": "nutritionCompany789",
     "name": "Nutrition Center Z",
     "address": "789 Health Plaza",
-    "contact": "contact@nutritioncenterZ.com",
+    "contactEmail": "contact@nutritioncenterZ.com",
     "services": ["consulta nutricional", "plano alimentar", "avaliação física"]
   }
 ]
-

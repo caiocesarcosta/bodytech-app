@@ -38,16 +38,16 @@ class FirebaseAuthRepository @Inject constructor() : AuthRepository {
 
     override suspend fun createUserWithEmailAndPassword(user: User): Result<Boolean> {
         return try {
-            val authResult = auth.createUserWithEmailAndPassword(user.email!!, user.password!!).await()
-            val userId = authResult.user?.uid ?: throw Exception("Erro ao obter o UID do usuário")
+//            val authResult = auth.createUserWithEmailAndPassword(user.email!!).await()
+//            val userId = authResult.user?.uid ?: throw Exception("Erro ao obter o UID do usuário")
 
-            // Salva os dados do usuário no Firestore
-            val userWithoutPassword = user.copy(password = null) // Remove a senha para segurança
+         /*   // Salva os dados do usuário no Firestore
+//            val userWithoutPassword = user.copy(password = null) // Remove a senha para segurança
             db.collection("users").document(userId)
-                .set(userWithoutPassword)
-                .await()
+//                .set(userWithoutPassword)
+                .await()*/
 
-            Log.d("AuthRepository", "Usuário criado com sucesso. UID: $userId")
+//            Log.d("AuthRepository", "Usuário criado com sucesso. UID: $userId")
             Result.success(true)
         } catch (e: Exception) {
             Log.e("AuthRepository", "Erro ao criar usuário: ${e.message}", e)

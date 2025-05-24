@@ -1,22 +1,24 @@
 package com.example.bodytech.model.user
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "users")
+/**
+ * [User] representa uma entidade de usuário.
+ * Este modelo é usado para serialização/desserialização com Firestore e Gson.
+ *
+ * @property id O ID único do usuário. Corresponde ao ID do documento no Firestore (e ao UID do Firebase Auth).
+ * @property name O nome completo do usuário.
+ * @property email O endereço de e-mail do usuário.
+ * @property birthDate A data de nascimento do usuário no formato String.
+ * @property gender O gênero do usuário.
+ * @property associatedCompanies Uma lista de IDs das empresas às quais o usuário está associado.
+ */
 data class User(
-    @PrimaryKey
-    @ColumnInfo(name = "userId")
-    val userId: String, // Agora é String!
-    @ColumnInfo(name = "name")
-    val name: String?,
-    @ColumnInfo(name = "email")
-    val email: String?,
-    @ColumnInfo(name = "birth_date")
-    val birthDate: String?,
-    @ColumnInfo(name = "gender")
-    val gender: String?,
-    @ColumnInfo(name = "password")
-    var password: String? // Adicione o campo password
+    @SerializedName("id") val id: String, // Alterado de userId para id
+    @SerializedName("name") val name: String?,
+    @SerializedName("email") val email: String?,
+    @SerializedName("birthDate") val birthDate: String?, // Usando String para compatibilidade JSON
+    @SerializedName("gender") val gender: String?,
+    // REMOVIDO: password: String? - Senhas são gerenciadas pelo Firebase Authentication, não no Firestore.
+    @SerializedName("associatedCompanies") val associatedCompanies: List<String>? // Corrigido para corresponder ao JSON
 )

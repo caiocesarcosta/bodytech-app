@@ -1,6 +1,6 @@
-package com.example.bodytech.ui // Ajuste o pacote, se necessário
+package com.example.bodytech.ui
 
-// Importe suas ViewModels e estados de criação de dados
+// Imports para Flow
 
 import android.content.Intent
 import android.os.Bundle
@@ -26,7 +26,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -37,6 +36,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.bodytech.ui.theme.BodyTechTheme
 import com.example.bodytech.viewmodel.company.CompanyViewModel
 import com.example.bodytech.viewmodel.company.CompanyViewModelImpl
@@ -54,41 +54,35 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Comentei ou removi o redirecionamento direto para LoginActivity aqui
-        // pois a MainActivity agora terá sua própria UI de "home" de testes.
-        // Você iniciará a LoginActivity a partir de um botão nesta UI.
-
         setContent {
             BodyTechTheme {
-                MainTestScreen() // Nossa nova Composable principal para a MainActivity de testes
+                MainTestScreen()
             }
         }
     }
 }
 
-// Enum para controlar qual opção de criação de dados está selecionada
 enum class CreationOption {
     NONE, USER, COMPANY
 }
 
-@OptIn(ExperimentalMaterial3Api::class) // Anotação para Material3 experimental (OutlinedTextField, etc.)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainTestScreen(
     userViewModel: UserViewModel = hiltViewModel<UserViewModelImp>(),
     companyViewModel: CompanyViewModel = hiltViewModel<CompanyViewModelImpl>()
 ) {
-    val context = LocalContext.current // Para Toast messages
-    val coroutineScope = rememberCoroutineScope() // Para lançar coroutines
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
 
-    // Estado para controlar qual opção de criação está selecionada (Usuário, Empresa, Nenhum)
     var selectedCreationOption by remember { mutableStateOf(CreationOption.NONE) }
 
-    // Estados de criação de usuário/empresa da ViewModel
-    val createUserStatus by userViewModel.createUsersStatus.observeAsState(initial = CreateUsersState.Idle)
-    val createCompanyStatus by companyViewModel.createCompaniesStatus.observeAsState(initial = CreateCompanyState.Idle)
+    // Mantemos as coleções aqui para os LaunchedEffects que reagem a mudanças globais
+    // (e para o caso de algum outro componente filho precisar do estado)
+    val createUserStatus by userViewModel.createUsersStatus.collectAsStateWithLifecycle()
+    val createCompanyStatus by companyViewModel.createCompaniesStatus.collectAsStateWithLifecycle()
 
-    // Efeitos colaterais para mostrar mensagens de sucesso/falha na criação
+
     LaunchedEffect(createUserStatus) {
         when (createUserStatus) {
             is CreateUsersState.Success -> Toast.makeText(
@@ -133,7 +127,6 @@ fun MainTestScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        // --- Botão "Fazer Login" ---
         Button(
             onClick = {
                 val intent = Intent(context, LoginActivity::class.java)
@@ -146,23 +139,20 @@ fun MainTestScreen(
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        // --- Caixas de Seleção (Radio Buttons) ---
         Text("Criar Dados de Teste:")
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .selectableGroup(), // Torna os RadioButtons mutuamente exclusivos
+                .selectableGroup(),
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // RadioButton para Usuário
             RadioButtonWithText(
                 text = "Criar Usuário",
                 selected = selectedCreationOption == CreationOption.USER,
                 onClick = { selectedCreationOption = CreationOption.USER }
             )
 
-            // RadioButton para Empresa
             RadioButtonWithText(
                 text = "Criar Empresa",
                 selected = selectedCreationOption == CreationOption.COMPANY,
@@ -172,7 +162,6 @@ fun MainTestScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // --- Campos de Preenchimento Dinâmicos ---
         when (selectedCreationOption) {
             CreationOption.USER -> {
                 UserCreationForm(userViewModel, coroutineScope)
@@ -189,7 +178,6 @@ fun MainTestScreen(
     }
 }
 
-// Composable auxiliar para RadioButton com texto
 @Composable
 fun RadioButtonWithText(
     text: String,
@@ -206,64 +194,62 @@ fun RadioButtonWithText(
             .padding(horizontal = 8.dp, vertical = 4.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        RadioButton(
-            selected = selected,
-            onClick = null
-        ) // onClick é nulo porque o selectable já lida com o clique
+        RadioButton(selected = selected, onClick = null)
         Spacer(Modifier.width(8.dp))
         Text(text)
     }
 }
 
-// --- Composable para Formulário de Criação de Usuário ---
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserCreationForm(
     userViewModel: UserViewModel,
-    coroutineScope: CoroutineScope // Scope para lançar coroutines
+    coroutineScope: CoroutineScope
 ) {
-    // Campos para preencher os dados do usuário (simplificado para o teste)
-    // Para um teste real, você precisaria de TextFields para cada campo
-    // Aqui, vamos apenas ter um botão que aciona a função de teste do ViewModel
+    // CORREÇÃO AQUI: Coletar o StateFlow dentro deste Composable para usar o estado reativamente
+    val createUserStatus by userViewModel.createUsersStatus.collectAsStateWithLifecycle()
+
     Button(
         onClick = {
             coroutineScope.launch {
                 userViewModel.createAllUsersFromJson()
             }
         },
-        enabled = userViewModel.createUsersStatus.value != CreateUsersState.Loading // Desabilita enquanto estiver carregando
+        // Usar a variável coletada 'createUserStatus'
+        enabled = createUserStatus != CreateUsersState.Loading
     ) {
         Text("Criar Todos os Usuários do JSON")
     }
 
-    // Opcional: Mostrar CircularProgressIndicator se estiver carregando
-    if (userViewModel.createUsersStatus.value == CreateUsersState.Loading) {
+    // Usar a variável coletada 'createUserStatus'
+    if (createUserStatus == CreateUsersState.Loading) {
         CircularProgressIndicator(modifier = Modifier.padding(top = 8.dp))
     }
 }
 
-// --- Composable para Formulário de Criação de Empresa ---
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CompanyCreationForm(
     companyViewModel: CompanyViewModel,
-    coroutineScope: CoroutineScope // Scope para lançar coroutines
+    coroutineScope: CoroutineScope
 ) {
-    // Campos para preencher os dados da empresa (simplificado para o teste)
-    // Da mesma forma que o usuário, um botão para acionar a criação do JSON
+    // CORREÇÃO AQUI: Coletar o StateFlow dentro deste Composable para usar o estado reativamente
+    val createCompanyStatus by companyViewModel.createCompaniesStatus.collectAsStateWithLifecycle()
+
     Button(
         onClick = {
             coroutineScope.launch {
                 companyViewModel.createAllCompaniesFromJson()
             }
         },
-        enabled = companyViewModel.createCompaniesStatus.value != CreateCompanyState.Loading // Desabilita enquanto estiver carregando
+        // Usar a variável coletada 'createCompanyStatus'
+        enabled = createCompanyStatus != CreateCompanyState.Loading
     ) {
         Text("Criar Todas as Empresas do JSON")
     }
 
-    // Opcional: Mostrar CircularProgressIndicator se estiver carregando
-    if (companyViewModel.createCompaniesStatus.value == CreateCompanyState.Loading) {
+    // Usar a variável coletada 'createCompanyStatus'
+    if (createCompanyStatus == CreateCompanyState.Loading) {
         CircularProgressIndicator(modifier = Modifier.padding(top = 8.dp))
     }
 }

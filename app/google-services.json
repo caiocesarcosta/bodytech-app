@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "504255037510",
     "project_id": "body-tech-app",
-    "storage_bucket": "body-tech-app.appspot.com"
+    "storage_bucket": "body-tech-app.firebasestorage.app"
   },
   "client": [
     {

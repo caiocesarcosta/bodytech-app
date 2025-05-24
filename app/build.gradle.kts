@@ -96,7 +96,8 @@ dependencies {
     // implementation(libs.google.code.gson)
 
     // Hilt - Injeção de Dependência
-    implementation(libs.bundles.hilt.runtime) // Bundle para Hilt runtime e navegação
+    implementation(libs.bundles.hilt.runtime)
+    implementation(libs.androidx.lifecycle.runtime.compose.android) // Bundle para Hilt runtime e navegação
     ksp(libs.google.hilt.android.compiler)   // Processador KSP do Hilt
 
     // Databinding Adapters (dependência específica que você tinha)
@@ -110,8 +111,8 @@ dependencies {
     implementation(libs.jetbrains.kotlinx.coroutines.play.services) // Kotlin Coroutines com Play Services para await()
 
     // Room - Persistência
-    implementation(libs.bundles.room.runtime) // Bundle para Room runtime e KTX
-    ksp(libs.androidx.room.compiler)       // Processador KSP do Room
+/*    implementation(libs.bundles.room.runtime) // Bundle para Room runtime e KTX
+    ksp(libs.androidx.room.compiler)*/       // Processador KSP do Room
     // kapt(libs.androidx.room.compiler)    // Use se preferir Kapt
 
     // Dependências de Módulos Locais

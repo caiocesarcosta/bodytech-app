@@ -1,23 +1,21 @@
 package com.example.bodytech.model.company
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "companies")
+/**
+ * [Company] representa uma entidade de empresa.
+ * Este modelo é usado para serialização/desserialização com Firestore e Gson.
+ *
+ * @property id O ID único da empresa. Corresponde ao ID do documento no Firestore.
+ * @property name O nome da empresa.
+ * @property address O endereço da empresa.
+ * @property contactEmail O e-mail de contato da empresa.
+ * @property services Uma lista de serviços oferecidos pela empresa.
+ */
 data class Company(
-    @PrimaryKey
-    @ColumnInfo(name = "companyId")
-    val companyId: String, // Agora é String!
-    @ColumnInfo(name = "name")
-    val name: String?,
-    @ColumnInfo(name = "address")
-    val address: String?,
-    @ColumnInfo(name = "contact")
-    val contact: String?,
-
-    @ColumnInfo(name = "services")
-
-    val services: List<String>?
-    // ... outros campos relevantes para a empresa
+    @SerializedName("id") val id: String, // Alterado de companyId para id
+    @SerializedName("name") val name: String?,
+    @SerializedName("address") val address: String?,
+    @SerializedName("contactEmail") val contactEmail: String?, // Alterado de contact para contactEmail
+    @SerializedName("services") val services: List<String>?
 )

@@ -1,8 +1,8 @@
 [versions]
 # Versões de Plugins
-compileSdk = "34"
+compileSdk = "35"
 minSdk = "26"
-targetSdk = "34"
+targetSdk = "35"
 versionCode = "1"
 versionName = "1.0"
 jvmTarget = "11"
@@ -35,11 +35,12 @@ hiltNavigationCompose = "1.0.0" # -> Considere atualizar Hilt Navigation
 retrofit = "2.9.0" # -> Considere Retrofit 2.10+ ou Ktor
 retrofitGsonConverter = "2.9.0"
 coroutinesAndroid = "1.7.3" # -> Considere atualizar para 1.8.x
-lifecycleViewModelCompose = "2.6.2" # -> Considere atualizar
+lifecycleViewModelCompose = "2.9.0" # -> Considere atualizar
 navigationCompose = "2.7.5" # -> Considere atualizar
 composeRuntimeLivedata = "1.5.4" # -> Considere atualizar
 room = "2.6.1" # -> Verifique compatibilidade
 coroutinesPlayServices = "1.7.3"
+lifecycleRuntimeComposeAndroid = "2.9.0"
 
 
 [libraries]
@@ -97,6 +98,7 @@ test-androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-j
 # Debug/Tooling Dependencies (geralmente em debugImplementation)
 debug-androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 debug-androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeComposeAndroid" }
 
 
 [bundles]

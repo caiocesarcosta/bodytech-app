@@ -1,12 +1,8 @@
 package com.example.bodytech.di
 
-import android.content.Context
-import androidx.room.Room
-import com.example.bodytech.data.local.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +17,7 @@ object ApplicationModule {
     @Singleton
     fun provideCoroutineDispatcher(): CoroutineDispatcher = Dispatchers.IO
 
-    @Provides
+    /*@Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
         return Room.databaseBuilder(
@@ -41,6 +37,6 @@ object ApplicationModule {
     fun provideCompanyDao(appDatabase: AppDatabase) = appDatabase.companyDao()
 
     @Provides
-    fun provideCompanyUserDao(appDatabase: AppDatabase) = appDatabase.companyUserDao()
+    fun provideCompanyUserDao(appDatabase: AppDatabase) = appDatabase.companyUserDao()*/
 
 }

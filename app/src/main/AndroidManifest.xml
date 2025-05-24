@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.bodytech"
     android:minSdkVersion="21">
+    <queries>
+        <package android:name="com.google.android.gms" />
+    </queries>
+
 
     <uses-feature
         android:name="android.hardware.camera"

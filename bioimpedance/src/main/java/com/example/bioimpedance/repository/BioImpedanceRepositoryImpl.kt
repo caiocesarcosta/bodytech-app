@@ -1,12 +1,9 @@
 package com.example.bioimpedance.repository
 
 import android.content.Context
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
-import com.example.bioimpedance.data.local.room.BioimpedanceDataDao
 import com.example.bioimpedance.model.BioImpedanceData
-import com.example.bioimpedance.model.BioimpedanceDataEntity
+//import com.example.bioimpedance.model.BioimpedanceDataEntity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -15,7 +12,6 @@ import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.time.OffsetDateTime
@@ -25,13 +21,13 @@ import javax.inject.Inject
 class BioImpedanceRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
-    private val bioImpedanceDataDao: BioimpedanceDataDao
-) : BioImpedanceRepository {
+
+    ) : BioImpedanceRepository {
 
     private val db = Firebase.firestore
     private val auth = Firebase.auth
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override suspend fun saveBioImpedanceData(data: BioImpedanceData): Result<Unit> {
         return withContext(ioDispatcher) {
             try {
@@ -39,7 +35,7 @@ class BioImpedanceRepositoryImpl @Inject constructor(
                 val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME // Define o formato ISO 8601
                 val date = OffsetDateTime.parse(data.date, formatter) // Faz o parse da data
 
-                val bioimpedanceDataEntity = BioimpedanceDataEntity(
+                val bioimpedanceDataEntity = BioImpedanceData(
                     userId = data.userId!!,
                     bioimpedanceId = data.bioimpedanceId!!,
                     date = date.toString(),
@@ -71,8 +67,7 @@ class BioImpedanceRepositoryImpl @Inject constructor(
                     "Dados de bioimpedância salvos com sucesso Firestore!"
                 )
 
-                // TODO 3. Salvar no Room, criar função privada
-                bioImpedanceDataDao.insert(bioimpedanceDataEntity)
+//                bioImpedanceDataDao.insert(bioimpedanceDataEntity)
                 Log.d("BioimpedanceRepository", "Dados de bioimpedância salvos com sucesso Room!")
 
 
@@ -119,30 +114,33 @@ class BioImpedanceRepositoryImpl @Inject constructor(
     }
 
 
-    override suspend fun getBioimpedanceData(
-        userId: String,
-        companyId: String
-    ): Flow<List<BioimpedanceDataEntity>> {
-        return bioImpedanceDataDao.getAllByUserIdAndCompanyId(userId, companyId)
-    }
+    /*    override suspewnd fun getBioimpedanceData(
+            userId: String,
+            companyId: String
+        ): Flow<List<BioimpedanceDataEntity>> {
+            return null
+    //        bioImpedanceDataDao.getAllByUserIdAndCompanyId(userId, companyId)
+        }*/
 
-    override suspend fun updateBioimpedanceData(data: BioimpedanceDataEntity): Result<Unit> {
-        return try {
-            bioImpedanceDataDao.update(data)
-            Result.success(Unit) // Retorna sucesso se não houver exceções
-        } catch (e: Exception) {
-            Result.failure(e) // Retorna a exceção em caso de erro
-        }
-    }
+    /*    override suspend fun updateBioimpedanceData(data: BioimpedanceDataEntity): Result<Unit> {
+            return try {
+    //            bioImpedanceDataDao.update(data)
+                Result.success(Unit) // Retorna sucesso se não houver exceções
+            } catch (e: Exception) {
+                Result.failure(e) // Retorna a exceção em caso de erro
+            }
+        }*/
 
+/*
     override suspend fun deleteBioimpedanceData(data: BioimpedanceDataEntity): Result<Unit> {
         return try {
-            bioImpedanceDataDao.delete(data)
+//            bioImpedanceDataDao.delete(data)
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
         }
     }
+*/
 
     override suspend fun getCompanyIdForCurrentUser(): String? {
         return withContext(ioDispatcher) {

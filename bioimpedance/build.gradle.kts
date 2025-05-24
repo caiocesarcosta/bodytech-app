@@ -81,9 +81,9 @@ dependencies {
     ksp(libs.google.hilt.android.compiler)   // Processador KSP do Hilt
 
     // Room - Persistência
-    implementation(libs.bundles.room.runtime) // Bundle para Room runtime e KTX
+   /* implementation(libs.bundles.room.runtime) // Bundle para Room runtime e KTX
     ksp(libs.androidx.room.compiler)       // Processador KSP do Room
-
+*/
     // Networking - Retrofit
     implementation(libs.bundles.retrofit) // Bundle para Retrofit e conversor Gson
 

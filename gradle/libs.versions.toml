@@ -26,7 +26,7 @@ composeMaterial3 = "1.1.2"
 # uiTooling = "1.5.1" # -> Use a versão do compose Bom 2024.04.00 ou mais recente
 lifecycleRuntimeKtx = "2.6.1" # -> Considere atualizar para versões compatíveis com Kotlin 2.x
 coreKtx = "1.13.1"
-firebaseBom = "32.3.1" # -> Verifique compatibilidade com novas versões do AGP/Kotlin
+firebaseBom = "32.7.4" # -> Verifique compatibilidade com novas versões do AGP/Kotlin
 firebaseFirestoreKtx = "24.9.1" # -> Verifique compatibilidade
 gson = "2.10.1"
 firebaseAuthKtx = "22.1.1" # -> Verifique compatibilidade
@@ -67,6 +67,8 @@ androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime
 google-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" } # Declarar como platform()
 google-firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx"  } # Versão gerenciada pelo firebaseBom
 google-firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebaseAuthKtx"} # Versão gerenciada pelo firebaseBom
+google-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" } # Versão sem KTX para Hilt injection (se necessário)
+google-firebase-auth = { group = "com.google.firebase", name = "firebase-auth" } # Versão sem KTX para Hilt injection (se necessário)
 
 # Hilt (Dependency Injection)
 google-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
@@ -115,7 +117,9 @@ compose = [
 ]
 firebase = [ # BOM declarado separadamente com platform(libs.google.firebase.bom)
     "google-firebase-firestore-ktx",
+    "google-firebase-firestore",
     "google-firebase-auth-ktx",
+    "google-firebase-auth",
 ]
 hilt-runtime = [ # Compilador declarado separadamente com kapt/ksp(libs.google.hilt.android.compiler)
     "google-hilt-android",

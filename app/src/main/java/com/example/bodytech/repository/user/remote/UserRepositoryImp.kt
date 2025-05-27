@@ -3,10 +3,10 @@ package com.example.bodytech.repository.user.remote
 import android.content.Context
 import android.util.Log
 import com.example.bodytech.model.user.User
-import com.google.common.reflect.TypeToken
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

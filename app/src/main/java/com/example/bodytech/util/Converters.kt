@@ -1,7 +1,7 @@
 package com.example.bodytech.util
 
-import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.util.Date
 
 class Converters {

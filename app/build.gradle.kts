@@ -2,13 +2,13 @@
 
 plugins {
     // Aplica os plugins usando os aliases do catálogo de versões (libs)
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose.compiler) // Necessário para Jetpack Compose
-    alias(libs.plugins.google.services)         // Plugin do Google Services (Firebase, etc.)
-    alias(libs.plugins.hilt)                    // Plugin do Hilt para injeção de dependência
-    alias(libs.plugins.ksp)                     // KSP para processadores de anotação (Hilt, Room)
-    // alias(libs.plugins.kotlin.kapt) // Descomente se ainda usar Kapt para algum processador
+    alias(libs.plugins.androidApplication) // CORRIGIDO: de android.application para androidApplication
+    alias(libs.plugins.kotlinAndroid)     // CORRIGIDO: de kotlin.android para kotlinAndroid
+    alias(libs.plugins.kotlinComposeCompiler) // CORRIGIDO: de kotlin.compose.compiler para kotlinComposeCompiler
+    alias(libs.plugins.googleServices)         // CORRIGIDO: de google.services para googleServices
+    alias(libs.plugins.hilt)                   // JÁ ESTAVA CORRETO
+    alias(libs.plugins.ksp)                    // JÁ ESTAVA CORRETO
+    // alias(libs.plugins.kotlinKapt) // Descomente se ainda usar Kapt para algum processador
 }
 
 android {
@@ -93,7 +93,7 @@ dependencies {
     // implementation(libs.androidx.constraintlayout) // Se ainda usar ConstraintLayout XML
 
     // Gson (usado pelo Retrofit bundle, mas pode declarar aqui se usar diretamente)
-    // implementation(libs.google.code.gson)
+     implementation(libs.google.code.gson)
 
     // Hilt - Injeção de Dependência
     implementation(libs.bundles.hilt.runtime)

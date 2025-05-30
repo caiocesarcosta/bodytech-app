@@ -1,116 +1,90 @@
-// :bioimpedance/build.gradle.kts
+// bioimpedance/build.gradle.kts
 
 plugins {
-    // Aplica os plugins usando os aliases do catálogo de versões (libs)
-    alias(libs.plugins.android.library) // Plugin para módulo de biblioteca Android
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose.compiler) // Necessário para Jetpack Compose
-    alias(libs.plugins.hilt)                    // Plugin do Hilt para injeção de dependência
-    alias(libs.plugins.ksp)                     // KSP para processadores de anotação (Hilt, Room)
-    // alias(libs.plugins.kotlin.kapt) // Descomente se ainda usar Kapt
+    alias(libs.plugins.androidLibrary)       // Certifique-se que é androidLibrary aqui!
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinComposeCompiler) // Se este módulo usa Compose
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    // Namespace do seu módulo de biblioteca
-    namespace = "com.example.bioimpedance" // Substitua pelo seu namespace real
-    // Referencia as versões do SDK do catálogo
-    compileSdk = libs.versions.compileSdk.get().toInt() // Assume compileSdk está no [versions] do TOML
+    namespace = "com.example.bodytech.bioimpedance" // Ajuste o namespace para o módulo
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        // Referencia a versão mínima do SDK do catálogo
-        minSdk = libs.versions.minSdk.get().toInt() // Assume minSdk está no [versions] do TOML
+        minSdk = libs.versions.minSdk.get().toInt()
+        // SEM applicationId, versionCode, versionName para módulos de biblioteca
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro") // Regras do Proguard para quem consumir esta lib
+        // --- AQUI É O LUGAR CORRETO PARA consumerProguardFiles ---
+        consumerProguardFiles("consumer-rules.pro") // Esta linha deve estar aqui!
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false // Habilite 'true' para builds de produção se necessário
+            isMinifyEnabled = false // Habilite 'true' para builds de produção
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro" // Estas regras são para o JAR da biblioteca
             )
         }
+        // Se tiver outras buildTypes, você pode adicionar consumerProguardFiles nelas também, se necessário
     }
 
     compileOptions {
-        // Define a compatibilidade Java
         val javaVersion = JavaVersion.VERSION_11
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
     }
 
     kotlinOptions {
-        // Define o target da JVM para o Kotlin (referencia a versão do catálogo)
-        jvmTarget = libs.versions.jvmTarget.get() // Assume jvmTarget está no [versions] do TOML
+        jvmTarget = libs.versions.jvmTarget.get()
     }
 
     buildFeatures {
-        compose = true // Habilita o Jetpack Compose neste módulo
+        compose = true // Se este módulo usa Compose
     }
 
     composeOptions {
-        // Define a versão do compilador de extensão do Compose (referencia a versão do catálogo)
         kotlinCompilerExtensionVersion = libs.versions.kotlinComposeCompiler.get()
-    }
-
-    packaging {
-        // Resolve conflitos comuns com dependências do Compose/Kotlin
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
     }
 }
 
 dependencies {
+    // Dependência do módulo core, se precisar
+//    implementation(project(":core"))
+
     // Firebase - BOM gerencia as versões
     implementation(platform(libs.google.firebase.bom))
+    // implementation(libs.google.firebase.firestore.ktx) // Exemplo usando alias individual
+    // implementation(libs.google.firebase.auth.ktx)      // Exemplo usando alias individual
     implementation(libs.bundles.firebase) // Usando o bundle para Firestore e Auth
 
-    // Jetpack Compose - BOM gerencia as versões
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.bundles.compose) // Usando o bundle para as libs comuns do Compose
-
-    // AndroidX Core (necessário para extensões Kotlin e Lifecycle)
+    // Dependências específicas do módulo bioimpedance
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx) // Necessário para escopos de Coroutine/Lifecycle
+    implementation(libs.androidx.appcompat)
+    implementation(libs.google.material)
 
-    // Hilt - Injeção de Dependência
-    implementation(libs.bundles.hilt.runtime) // Bundle para Hilt runtime e navegação
-    ksp(libs.google.hilt.android.compiler)   // Processador KSP do Hilt
+    // Gson (usado pelo Retrofit bundle, mas pode declarar aqui se usar diretamente)
+    implementation(libs.google.code.gson)
 
-    // Room - Persistência
-   /* implementation(libs.bundles.room.runtime) // Bundle para Room runtime e KTX
-    ksp(libs.androidx.room.compiler)       // Processador KSP do Room
-*/
     // Networking - Retrofit
     implementation(libs.bundles.retrofit) // Bundle para Retrofit e conversor Gson
 
-    // Coroutines
-    implementation(libs.jetbrains.kotlinx.coroutines.android)
-    implementation(libs.jetbrains.kotlinx.coroutines.play.services) // Kotlin Coroutines com Play Services para await()
 
-    // Testes Unitários (local)
-    testImplementation(libs.test.junit) // Apenas JUnit para testes locais neste módulo
+    // Se o módulo usa Compose
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.bundles.compose)
 
-    // Testes Instrumentados (Android)
-    androidTestImplementation(platform(libs.test.androidx.compose.bom)) // BOM para testes de UI do Compose
-    androidTestImplementation(libs.test.androidx.compose.ui.test.junit4) // Testes de UI do Compose
-    androidTestImplementation(libs.test.androidx.junit) // AndroidX Test JUnit runner
-    androidTestImplementation(libs.test.androidx.espresso.core) // Espresso para testes de UI
+    // Se o módulo usa Hilt
+    implementation(libs.google.hilt.android)
+    ksp(libs.google.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose) // Se este módulo tiver navegação via Compose
 
-    // Debug - Ferramentas de UI do Compose (geralmente gerenciadas pelo compose.bom principal)
-    debugImplementation(libs.debug.androidx.compose.ui.tooling)
-    debugImplementation(libs.debug.androidx.compose.ui.test.manifest)
+    // Testes
+    testImplementation(libs.test.junit)
+    androidTestImplementation(libs.test.androidx.junit)
+    androidTestImplementation(libs.test.androidx.espresso.core)
+    androidTestImplementation(platform(libs.test.androidx.compose.bom))
+    androidTestImplementation(libs.test.androidx.compose.ui.test.junit4)
 }
-
-// Configuração do KSP (se necessário, para passar argumentos para Room, etc.)
-// ksp {
-//    arg("room.schemaLocation", "$projectDir/schemas")
-// }
-
-// Configuração do Hilt (geralmente não necessária aqui se o plugin for aplicado)
-// hilt {
-//    enableAggregatingTask = true
-// }

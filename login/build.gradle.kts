@@ -1,13 +1,11 @@
 // :login/build.gradle.kts
 
 plugins {
-    // Aplica os plugins usando os aliases do catálogo de versões (libs)
-    alias(libs.plugins.android.library) // Plugin para módulo de biblioteca Android
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose.compiler) // Necessário para Jetpack Compose
-    alias(libs.plugins.hilt)                    // Plugin do Hilt para injeção de dependência
-    alias(libs.plugins.ksp)                     // KSP para processadores de anotação (Hilt, Room)
-    // alias(libs.plugins.kotlin.kapt) // Descomente se ainda usar Kapt
+    alias(libs.plugins.androidLibrary)       // Certifique-se que é androidLibrary aqui!
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinComposeCompiler) // Se este módulo usa Compose
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -66,8 +64,9 @@ android {
 dependencies {
     // Firebase - BOM gerencia as versões
     implementation(platform(libs.google.firebase.bom))
+    // implementation(libs.google.firebase.firestore.ktx) // Exemplo usando alias individual
+    // implementation(libs.google.firebase.auth.ktx)      // Exemplo usando alias individual
     implementation(libs.bundles.firebase) // Usando o bundle para Firestore e Auth
-
     // Jetpack Compose - BOM gerencia as versões
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose) // Usando o bundle para as libs comuns do Compose
@@ -84,8 +83,13 @@ dependencies {
     /*implementation(libs.bundles.room.runtime) // Bundle para Room runtime e KTX
     ksp(libs.androidx.room.compiler)     */  // Processador KSP do Room
 
+    // Gson (usado pelo Retrofit bundle, mas pode declarar aqui se usar diretamente)
+    implementation(libs.google.code.gson)
+
     // Networking - Retrofit
     implementation(libs.bundles.retrofit) // Bundle para Retrofit e conversor Gson
+
+
 
     // Coroutines
     implementation(libs.jetbrains.kotlinx.coroutines.android)

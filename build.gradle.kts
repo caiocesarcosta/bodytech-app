@@ -1,9 +1,23 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// build.gradle.kts (project level)
+
 plugins {
-    id("org.jetbrains.kotlin.android") version "2.1.20" apply false
-    id("com.google.devtools.ksp") version "2.1.20-1.0.31" apply false
-    id("com.android.application") version "8.7.2" apply false
-    id("com.android.library") version "8.9.0" apply false
-    id("org.jetbrains.kotlin.plugin.compose") version "2.0.21" apply false
-    id("com.google.dagger.hilt.android") version "2.51.1" apply false
+    // Android Gradle Plugins
+    alias(libs.plugins.androidApplication) apply false
+    alias(libs.plugins.androidLibrary) apply false
+
+    // Kotlin Plugins
+    alias(libs.plugins.kotlinAndroid) apply false
+    alias(libs.plugins.kotlinJvm) apply false             // NOVO: Adicionado para módulos JVM puros
+    alias(libs.plugins.kotlinComposeCompiler) apply false
+
+    // Ferramentas de Processamento de Anotações
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.hilt) apply false
+
+    // Plugins de Serviços
+    alias(libs.plugins.googleServices) apply false         // Já estava no toml, agora com alias correto
+    // Se você ainda usa Kapt (em vez de KSP para Hilt/Room), inclua-o também:
+    // alias(libs.plugins.kotlinKapt) apply false
+    // Se você usa Parcelize, inclua-o:
+    // alias(libs.plugins.kotlinParcelize) apply false
 }

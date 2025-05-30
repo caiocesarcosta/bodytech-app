@@ -1,110 +1,124 @@
+# gradle/libs.versions.toml
+
 [versions]
-# Versões de Plugins
+# SDK e Targets
 compileSdk = "35"
 minSdk = "26"
 targetSdk = "35"
+jvmTarget = "11"
+
+# Versões do Aplicativo
 versionCode = "1"
 versionName = "1.0"
-jvmTarget = "11"
-agp = "8.7.2"  # Android Gradle Plugin
+
+# --- Versões de Plugins ---
+agp = "8.7.2" # Android Gradle Plugin
+androidLibraryPlugin = "8.9.0" # AGP para módulos library (versão separada)
 kotlin = "2.1.20"
 ksp = "2.1.20-1.0.31"
 kotlinComposeCompiler = "2.0.21"
 hiltAndroid = "2.51.1"
-googleServices = "4.4.2"
-appcompat = "1.7.0"
-constraintLayout = "2.2.1"
-material = "1.12.0"
-junit = "4.13.2"
-extJunit = "1.2.1"
-espresso = "3.6.1"
-composeBom = "2025.05.01"
-testComposeBom = "2025.05.01"
+googleServices = "4.4.2" # Versão do Google Services (Firebase)
+
+# --- Versões de Bibliotecas ---
 activityCompose = "1.10.1"
+appcompat = "1.7.0"
+composeBom = "2025.05.01"
 composeMaterial3 = "1.3.2"
-# uiTestJunit4 = "1.5.1" # -> Use a versão do compose Bom 2024.04.00 ou mais recente
-# uiTooling = "1.5.1" # -> Use a versão do compose Bom 2024.04.00 ou mais recente
-lifecycleRuntimeKtx = "2.9.0" # -> Considere atualizar para versões compatíveis com Kotlin 2.x
+composeRuntimeLivedata = "1.8.2"
+constraintLayout = "2.2.1"
 coreKtx = "1.16.0"
-firebaseBom = "33.14.0" # -> Verifique compatibilidade com novas versões do AGP/Kotlin
-firebaseFirestoreKtx = "25.1.4" # -> Verifique compatibilidade
-gson = "2.11.0"
-firebaseAuthKtx = "23.2.1" # -> Verifique compatibilidade
-hiltNavigationFragment = "1.2.0" # -> Considere atualizar Hilt Navigation
-hiltNavigationCompose = "1.2.0" # -> Considere atualizar Hilt Navigation
-retrofit = "2.9.0" # -> Considere Retrofit 2.10+ ou Ktor
-retrofitGsonConverter = "2.9.0"
-coroutinesAndroid = "1.7.3" # -> Considere atualizar para 1.8.x
-lifecycleViewModelCompose = "2.9.0" # -> Considere atualizar
-navigationCompose = "2.9.0" # -> Considere atualizar
-composeRuntimeLivedata = "1.8.2" # -> Considere atualizar
-room = "2.7.1" # -> Verifique compatibilidade
+coroutinesAndroid = "1.7.3"
 coroutinesPlayServices = "1.7.3"
+espresso = "3.6.1"
+extJunit = "1.2.1"
+firebaseAuthKtx = "23.2.1"
+firebaseBom = "33.14.0"
+firebaseFirestoreKtx = "25.1.4"
+gson = "2.11.0"
+hiltNavigationCompose = "1.2.0"
+hiltNavigationFragment = "1.2.0"
+junit = "4.13.2"
 lifecycleRuntimeComposeAndroid = "2.9.0"
+lifecycleRuntimeKtx = "2.9.0"
+lifecycleViewModelCompose = "2.9.0"
+material = "1.12.0"
+navigationCompose = "2.9.0"
+retrofit = "2.9.0"
+retrofitGsonConverter = "2.9.0"
+room = "2.7.1"
+testComposeBom = "2025.05.01"
 
 
 [libraries]
-# AndroidX Core & UI
-databinding-adapters = { group = "androidx.databinding", name = "adapters", version = "3.2.0-alpha11" }
+# --- AndroidX Core & UI ---
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayout" }
-google-material = { module = "com.google.android.material:material", version.ref = "material" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeComposeAndroid" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewModelCompose" }
+databinding-adapters = { group = "androidx.databinding", name = "adapters", version = "3.2.0-alpha11" }
+google-material = { module = "com.google.android.material:material", version.ref = "material" }
 
-# Jetpack Compose
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+
+# --- Jetpack Compose ---
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" } # Declarar como platform()
+androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
+androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "composeRuntimeLivedata" }
 androidx-compose-ui = { module = "androidx.compose.ui:ui" } # Versão gerenciada pelo composeBom
 androidx-compose-ui-graphics = { module = "androidx.compose.ui:ui-graphics" } # Versão gerenciada pelo composeBom
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" } # Versão gerenciada pelo composeBom
-androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" } # Pode precisar atualizar para compatibilidade com Compose Compiler 2.x
-androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewModelCompose" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
-androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "composeRuntimeLivedata" }
 
-# Firebase
-google-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" } # Declarar como platform()
-google-firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx"  } # Versão gerenciada pelo firebaseBom
-google-firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebaseAuthKtx"} # Versão gerenciada pelo firebaseBom
-google-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" } # Versão sem KTX para Hilt injection (se necessário)
+
+# --- Firebase ---
 google-firebase-auth = { group = "com.google.firebase", name = "firebase-auth" } # Versão sem KTX para Hilt injection (se necessário)
+google-firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx", version.ref = "firebaseAuthKtx" } # Versão gerenciada pelo firebaseBom
+google-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" } # Declarar como platform()
+google-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" } # Versão sem KTX para Hilt injection (se necessário)
+google-firebase-firestore-ktx = { module = "com.google.firebase:firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" } # Versão gerenciada pelo firebaseBom
 
-# Hilt (Dependency Injection)
+
+# --- Hilt (Dependency Injection) ---
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hiltNavigationFragment" }
 google-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 google-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" } # Kapt/KSP
-androidx-hilt-navigation-fragment = { module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hiltNavigationFragment" }
-androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 
-# Networking (Retrofit)
+
+# --- Networking (Retrofit) ---
+google-code-gson = { module = "com.google.code.gson:gson", version.ref = "gson" } # Dependência do converter-gson
 squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 squareup-retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitGsonConverter" }
-google-code-gson = { module = "com.google.code.gson:gson", version.ref = "gson" } # Dependência do converter-gson
 
-# Coroutines
+
+# --- Coroutines ---
 jetbrains-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutinesAndroid" }
 jetbrains-kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "coroutinesPlayServices" }
 
-# Room (Persistence)
-androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" } # Kapt/KSP
 
-# Test Dependencies
-test-junit = { module = "junit:junit", version.ref = "junit" }
-test-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "extJunit" }
-test-androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+# --- Room (Persistence) ---
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" } # Kapt/KSP
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+
+
+# --- Test Dependencies ---
 test-androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "testComposeBom" } # Declarar como platform() em testImplementation
 test-androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
+test-androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
+test-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "extJunit" }
+test-junit = { module = "junit:junit", version.ref = "junit" }
 
-# Debug/Tooling Dependencies (geralmente em debugImplementation)
+
+# --- Debug/Tooling Dependencies (geralmente em debugImplementation) ---
 debug-androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 debug-androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
-androidx-lifecycle-runtime-compose-android = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose-android", version.ref = "lifecycleRuntimeComposeAndroid" }
 
 
 [bundles]
-# ... (seção bundles permanece a mesma da resposta anterior) ...
 compose = [
     "androidx-activity-compose",
     "androidx-compose-ui",
@@ -141,15 +155,22 @@ test-core = [
     "test-androidx-espresso-core",
 ]
 
+
 [plugins]
-# Define os plugins do Gradle. Use alias(libs.plugins.nome) no bloco plugins{}
-android-application = { id = "com.android.application", version.ref = "agp" }
-android-library = { id = "com.android.library"} # Usando a mesma versão agp
-#android-library = { id = "com.android.library", version.ref = "agp" } # Usando a mesma versão agp
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" } # Se ainda usar Kapt
-kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
-kotlin-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlinComposeCompiler" } # Adicionado
+# Android Gradle Plugins
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "androidLibraryPlugin" } # Usando a versão de library
+
+# Kotlin Plugins
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" } # NOVO: Plugin para módulos JVM puros
+kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" } # Se ainda usar Kapt (geralmente para Hilt/Room sem KSP)
+kotlinParcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlinComposeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlinComposeCompiler" }
+
+# Ferramentas de Processamento de Anotações
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
-google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+
+# Plugins de Serviços (Firebase)
+googleServices = { id = "com.google.gms.google-services", version.ref = "googleServices" } # Já estava com version.ref

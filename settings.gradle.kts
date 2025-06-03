@@ -17,3 +17,7 @@ rootProject.name = "BodyTech"
 include(":app")
 include(":bioimpedance")
 include(":login")
+include(":core")
+include(":user")
+include(":company")
+include(":home")

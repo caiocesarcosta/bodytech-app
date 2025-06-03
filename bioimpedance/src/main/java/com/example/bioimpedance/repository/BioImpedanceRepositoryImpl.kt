@@ -3,7 +3,6 @@ package com.example.bioimpedance.repository
 import android.content.Context
 import android.util.Log
 import com.example.bioimpedance.model.BioImpedanceData
-//import com.example.bioimpedance.model.BioimpedanceDataEntity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase

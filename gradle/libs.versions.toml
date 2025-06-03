@@ -28,6 +28,7 @@ composeMaterial3 = "1.3.2"
 composeRuntimeLivedata = "1.8.2"
 constraintLayout = "2.2.1"
 coreKtx = "1.16.0"
+kotlinxCoroutines = "1.8.0"
 coroutinesAndroid = "1.7.3"
 coroutinesPlayServices = "1.7.3"
 espresso = "3.6.1"
@@ -48,6 +49,8 @@ retrofit = "2.9.0"
 retrofitGsonConverter = "2.9.0"
 room = "2.7.1"
 testComposeBom = "2025.05.01"
+
+mockk = "1.13.11"
 
 
 [libraries]
@@ -95,6 +98,7 @@ squareup-retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-
 
 
 # --- Coroutines ---
+jetbrains-kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 jetbrains-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutinesAndroid" }
 jetbrains-kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "coroutinesPlayServices" }
 
@@ -116,6 +120,8 @@ test-junit = { module = "junit:junit", version.ref = "junit" }
 # --- Debug/Tooling Dependencies (geralmente em debugImplementation) ---
 debug-androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 debug-androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
+
+test-mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 
 
 [bundles]

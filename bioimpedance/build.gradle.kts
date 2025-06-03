@@ -52,7 +52,7 @@ android {
 
 dependencies {
     // Dependência do módulo core, se precisar
-//    implementation(project(":core"))
+    implementation(project(":core")) // Para modelos de dados de bioimpedância
 
     // Firebase - BOM gerencia as versões
     implementation(platform(libs.google.firebase.bom))

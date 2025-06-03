@@ -62,6 +62,11 @@ android {
 }
 
 dependencies {
+    implementation(project(":core")) // Para modelos de dados gerais
+    implementation(project(":user")) // Para mostrar informações do usuário
+    implementation(project(":company")) // Para mostrar informações da empresa
+    implementation(project(":bioimpedance")) // Para mostrar dados de bioimpedância
+
     // Firebase - BOM gerencia as versões
     implementation(platform(libs.google.firebase.bom))
     // implementation(libs.google.firebase.firestore.ktx) // Exemplo usando alias individual

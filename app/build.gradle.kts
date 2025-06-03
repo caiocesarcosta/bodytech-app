@@ -132,6 +132,13 @@ dependencies {
     // Debug - Ferramentas de UI do Compose (geralmente gerenciadas pelo compose.bom principal)
     debugImplementation(libs.debug.androidx.compose.ui.tooling)
     debugImplementation(libs.debug.androidx.compose.ui.test.manifest)
+
+    // Dependências para seus módulos de feature
+    implementation(project(":login"))
+    implementation(project(":home"))
+    implementation(project(":user"))
+    implementation(project(":company"))
+    implementation(project(":bioimpedance"))
 }
 
 // Configuração do KSP (se necessário, para passar argumentos)

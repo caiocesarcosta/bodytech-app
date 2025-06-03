@@ -62,6 +62,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core")) // Para modelos de dados e lógica de domínio
+
     // Firebase - BOM gerencia as versões
     implementation(platform(libs.google.firebase.bom))
     // implementation(libs.google.firebase.firestore.ktx) // Exemplo usando alias individual
